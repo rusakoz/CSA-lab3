@@ -68,8 +68,9 @@ comment         ::= "//" <any symbols except "\n">
 ```
          Memory
 +---------------------+
-|  00  :  instruction |
+|  00  :     jmp      |
 |  01  :  instruction |
+|  02  :  instruction |
 |  ...       ...      |
 |  b   :   variable   |
 |  b+1 :   variable   |
@@ -117,6 +118,7 @@ comment         ::= "//" <any symbols except "\n">
 
 ### Кодирование инструкций
 Бинарное кодирование инструкций
+
 
 ## Транслятор
 
