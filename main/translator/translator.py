@@ -72,6 +72,7 @@ def get_addr_var(instructions: list, var_name_addr: dict, to_unlock: list, var: 
     return count_var, addr, start
 
 def text2instructions(text: str) -> list[Instruction]:
+    STR_MAX_LENGTH = 16
     end_blocks = count_end_blocks(text)
     counter_end_block = 0
     list_of_while_if = []
@@ -294,21 +295,34 @@ def text2instructions(text: str) -> list[Instruction]:
             count_var += 1
             without_tab = del_tab(input_[0])
             split_str = without_tab.split(" ")
+            first_cell = var_name_addr[split_str[1]].addr
 
-            instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0))
+            # TODO очищаем полностью пространство старой строки + вывод длины строки в константу
+            # for i in range(first_cell, first_cell + STR_MAX_LENGTH, 1):
+            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0))
+            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, i))
+
+            instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0)) # счетчик длины слова
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
+
+            instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, first_cell)) # адрес первой ячейки строки
+            instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
 
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, 2**32 - 1)) # получили входные данные
             instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверили на ноль
-            instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12)) # если ноль, то в конец всех эппэндов
-            instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, var_name_addr[split_str[1]].addr))
+            instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
+            instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1)) # сохранили в первую ячейку введенный символ
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
-            instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1))
+            instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
-            instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
-            instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 16)) # проверяем, чтобы строка была до 16 символов
+            instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
+            instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили адрес ячейки на 1(указываем на следующую)
+            instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
+            instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)) # проверяем, чтобы строка была до 16 символов
             instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
-            instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 14))
+            instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 12))
+
+            count_var += 1
             # print("start=====input=====")
         elif output_:
             # print("start=====output=====")
@@ -327,14 +341,35 @@ def text2instructions(text: str) -> list[Instruction]:
                     pass
                 # вывод строки
                 # TODO переделать вывод строк
+                count_var += 1
                 if str_length != None:
                     print("вывод строки")
                     print(var_name_addr[split_str[1]].addr)
                     print(str_length)
                     print(var_name_addr)
-                    for i in range(var_name_addr[split_str[1]].addr, var_name_addr[split_str[1]].addr + str_length, 1):
-                        instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, i))
-                        instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, 2**32))
+
+                    first_cell = var_name_addr[split_str[1]].addr
+
+                    instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0)) # счетчик длины слова
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
+
+                    instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, first_cell)) # адрес первой ячейки строки
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
+
+                    instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1)) # загружаем значение первой ячейки в ACC
+                    instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверяем на ноль
+                    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, 2**32)) # записываем значение в ячейку вывода
+                    instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
+                    instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
+                    instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
+                    instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили адрес ячейки на 1(указываем на следующую)
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
+                    instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)) # проверяем, чтобы строка была до 16 символов
+                    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
+                    instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 12))
+                    count_var += 1
                 # вывод числа
                 else:
                     print("вывод числа")

@@ -34,7 +34,7 @@
 <nl>             ::= "\n"
 
 <binary_op>     ::= "+" | "-" | "*" | "/" | "%"
-<comparison_op> ::= "==" | "!=" | ">" | "<" | ">=" | "<="
+<comparison_op> ::= "==" | "!=" | ">" | "<"
 
 comment         ::= "//" <any symbols except "\n">
 ```
@@ -193,7 +193,6 @@ comment         ::= "//" <any symbols except "\n">
 
 ### DataPath
 ``` text
-                                                                     
                                        +------------+            +----------+ <-- latch_addr
                 +-------(output)------ |   MEMORY   | <--(addr)--| addr_reg |
                 |                      +------------+            +----------+ <--+                 
@@ -214,7 +213,6 @@ instr_arg ----> +-------+       |                         |           |
                                              |
                                          latch_acc
 ```
-
 
 ## Тестирование
 Тестирование выполняется при помощи golden test-ов. Тесты и конфигурации в формате yaml.
