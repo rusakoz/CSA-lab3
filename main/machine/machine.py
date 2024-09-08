@@ -12,7 +12,7 @@ class DataPath():
         self.addr_reg = 0
         self.alu = 0
 
-        self.input_buffer = input_buffer + [chr(0)]
+        self.input_buffer = input_buffer
         self.output_buffer = []
 
         self.flag_z = True
@@ -22,8 +22,8 @@ class DataPath():
         if sel_input:
             if len(self.input_buffer) == 0:
                 raise EOFError
-            logging.debug(f'input: \"{"".join(self.input_buffer)}\" >> {self.acc}')
-            self.acc = ord(self.input_buffer.pop(0))
+            logging.debug(f'input: \"{"".join(str(self.input_buffer))}\" >> {self.acc}')
+            self.acc = self.input_buffer.pop(0)
         else:
             self.acc = self.alu
     
@@ -58,8 +58,9 @@ class DataPath():
 
     def signal_write(self):
         if self.addr_reg == OUTPUT_CELL:
-            logging.debug(f'output: \"{"".join(self.output_buffer)}\" << {chr(self.alu)}')
-            self.output_buffer.append(chr(self.alu))
+            print(self.alu)
+            logging.debug(f'output: \"{"".join(str(self.output_buffer))}\" << {self.alu}')
+            self.output_buffer.append(self.alu)
         else:
             self.memory[self.addr_reg] = self.alu
 
@@ -74,7 +75,7 @@ class ControlUnit():
     def tick(self):
         self._tick += 1
 
-    def current_tick(self):
+    def current_tick(self) -> int:
         return self._tick
     
     def latch_program_counter(self, sel_next: bool, instr_arg: int | None = None):
@@ -84,7 +85,7 @@ class ControlUnit():
         else:
             self.program_counter = instr_arg
     
-    def decode_and_execute_control_flow_instruction(self, instr: Instruction):
+    def decode_and_execute_control_flow_instruction(self, instr: Instruction) -> bool:
         if instr.opcode is Opcode.HLT:
             raise StopIteration
 
@@ -97,7 +98,7 @@ class ControlUnit():
         if instr.opcode is Opcode.BEQ: sel_next = not self.data_path.flag_z
         if instr.opcode is Opcode.BNE: sel_next = self.data_path.flag_z
         if instr.opcode is Opcode.BGE: sel_next = not self.data_path.flag_n
-        if instr.opcode is Opcode.BG:  sel_next = self.data_path.flag_n or self.data_path.flag_z
+        if instr.opcode is Opcode.BG:  sel_next = self.data_path.flag_n
 
         self.latch_program_counter(sel_next=sel_next, instr_arg=instr.arg)
         self.tick()
@@ -109,6 +110,7 @@ class ControlUnit():
 
         if self.decode_and_execute_control_flow_instruction(instr):
             return
+        
         if instr.opcode is Opcode.LD:
             if instr.addr_mode is AddrMode.DIRECT:
                 self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg) # установить в рег.адреса аргумент
@@ -116,28 +118,15 @@ class ControlUnit():
                 self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
                 self.tick()
             if instr.addr_mode is AddrMode.INDIRECT:
-                # print("dasdasda")
-                # print(instr.arg)
-                # print(1, self.data_path.alu)
                 self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
-                # print(2, self.data_path.addr_reg)
                 self.data_path.signal_read()
-                # print(3, self.data_path.memory_output)
-                # print(self.data_path.memory)
                 self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                # print(4, self.data_path.alu)
                 self.tick()
                 self.data_path.signal_latch_address(sel_instr=False)
-                # print(5, self.data_path.addr_reg)
                 self.data_path.signal_read()
-                # print(6, self.data_path.addr_reg)
                 self.tick()
                 self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                # print(self.data_path.acc)
-                # print(self.data_path.alu)
                 self.data_path.signal_latch_acc(sel_input=False)
-                # print(self.data_path.alu)
-                # print(self.data_path.acc)
             elif instr.addr_mode is AddrMode.IMMEDIATE:
                 self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
             if instr.arg == INPUT_CELL:
@@ -145,16 +134,21 @@ class ControlUnit():
             else:
                 self.data_path.signal_latch_acc(sel_input=False)
         elif instr.opcode is Opcode.ST:
-            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+            if instr.addr_mode is AddrMode.DIRECT:
+                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+                self.data_path.alu_op(sel_instr=False)
+                self.data_path.signal_write()
+                self.tick()
             if instr.addr_mode is AddrMode.INDIRECT:
+                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
                 self.data_path.signal_read()
                 self.tick()
                 self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
                 self.data_path.signal_latch_address(sel_instr=False)
                 self.tick()
-            self.data_path.alu_op(sel_instr=False)
-            self.data_path.signal_write()
-            self.tick()
+                self.data_path.alu_op(sel_instr=False)
+                self.data_path.signal_write()
+                self.tick()
         elif instr.opcode in {Opcode.ADD, Opcode.SUB, Opcode.MUL, Opcode.DIV, Opcode.MOD, Opcode.CMP}:
             if instr.addr_mode is AddrMode.DIRECT:
                 self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
@@ -172,7 +166,7 @@ class ControlUnit():
 
     def __repr__(self):
         return (
-            # f'MEMORY: {self.data_path.memory[:111]}'
+            # f'MEMORY: {self.data_path.memory[:90]}    '
             f'TICK: {self._tick}     '
             f'IP: {self.program_counter}    '
             f'ADDR: {self.data_path.addr_reg}    '
@@ -191,17 +185,17 @@ def simulation(memory: list[Instruction], input_buffer: list, limit: int) -> tup
     logging.debug(control_unit)
     try:
         while True:
-            assert program_counter < limit, "Слишком много инструкций"
+            assert program_counter < limit, "Слишком много исполнено инструкций"
             control_unit.decode_and_execute_instruction()
             program_counter += 1
             logging.debug(control_unit)
     except EOFError:
-        logging.warning('Входной буфер пустой!')
+        logging.warning(' Входной буфер пустой!')
     except StopIteration:
         pass
 
-    logging.debug('Output buffer: %s', ''.join(data_path.output_buffer))
-    return ''.join(str(data_path.output_buffer)), program_counter, control_unit.current_tick()
+    # logging.debug('Output buffer: %s', ''.join(str(data_path.output_buffer)))
+    return data_path.output_buffer, program_counter, control_unit.current_tick()
 
 
 def main(input_file: str, binary_file: str):
@@ -209,15 +203,19 @@ def main(input_file: str, binary_file: str):
         input_text = file.read()
         input_buffer = [char for char in input_text]
         input_buffer.append(chr(0))
+        input_buffer = [ord(token) for token in input_buffer]
         print(input_buffer)
-        print([ord(token) for token in input_buffer])
 
     memory = binary2code(binary_file)
-    for e, i in enumerate(memory):
-        print(e, i)
-    output, program_counter, ticks = simulation(memory, input_buffer, 777)
 
-    print(f'output: {"".join(output)}')
+    output, program_counter, ticks = simulation(memory, input_buffer, 100000)
+
+    # эмуляция ВУ
+    if len(output) != 1: 
+        output = [chr(char) for char in output]
+        print(f'output: {''.join(output)}')
+    else:
+        print(f'output: {output[0]}')
     print('program_counter: ', program_counter)
     print('ticks: ', ticks)
 

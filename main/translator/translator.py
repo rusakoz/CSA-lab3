@@ -16,8 +16,8 @@ def symbol2opcode(symbol) -> Opcode:
         "*": Opcode.MUL,
         "/": Opcode.DIV,
         "%": Opcode.MOD,
-        ">": Opcode.BG,
-        "<": Opcode.BGE,
+        ">": Opcode.BGE,
+        "<": Opcode.BG,
         "==": Opcode.BEQ,
         "!=": Opcode.BNE
     }.get(symbol)
@@ -64,7 +64,7 @@ def get_addr_var(instructions: list, var_name_addr: dict, to_unlock: list, var: 
                 break
         to_unlock.append(name_reused_mem)
         var_name_addr[name_reused_mem] = Addr(reused_mem, False)
-        instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, var))
+        instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, int(var)))
         if start == 0: start = len(instructions) - 1
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, reused_mem))
         addr = reused_mem
@@ -74,7 +74,6 @@ def get_addr_var(instructions: list, var_name_addr: dict, to_unlock: list, var: 
 
 def code2instructions(text: str) -> list[Instruction]:
     STR_MAX_LENGTH = 24
-    end_blocks = count_end_blocks(text)
     counter_end_block = 0
     list_of_while_if = []
     instructions = []
@@ -85,7 +84,6 @@ def code2instructions(text: str) -> list[Instruction]:
     count = -1
     for elem in text.splitlines():
         elem = get_main(elem)
-        # print(str(count) + " " + elem)
         count += 1
 
         name_or_digit = r"([_a-zA-Z]\w*|[-+]?[0-9]+)"
@@ -99,24 +97,17 @@ def code2instructions(text: str) -> list[Instruction]:
         end_block = re.search(r"^}", elem)
         input_ = re.search(r"^<< *[_a-zA-Z]\w*", elem)
         output_ = re.search(r"^>> *[_a-zA-Z]\w*", elem)
-        # print(math_op)
-        # print(if_statement)
-        # print(math_op)
-        # print(while_statement)
+
         if type_int:
-            # print(while_statement)
-            # print("start=====type_int=====")
             count_var += 1
             without_tab = del_tab(type_int[0])
             split_str = without_tab.split(" ")
-            # print(split_str)
+
             var_name_addr[split_str[1]] = Addr(count_var, False)
-            instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, split_str[3]))
+            instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, int(split_str[3])))
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
-            # print("end=====type_int=====")
+
         elif type_str:
-            # print(type_str)
-            # print("start=====type_str=====")
             count_var += 1
             without_tab = del_tab(type_str[0])
             split_str = without_tab.split(" ", 3)
@@ -131,56 +122,19 @@ def code2instructions(text: str) -> list[Instruction]:
                 instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
                 count_var += 1
             str_length = count_var - start_pos
-            if str_length < 16: count_var += (16 - str_length)
+            if str_length < STR_MAX_LENGTH: count_var += (STR_MAX_LENGTH - str_length)
             str_name_length[split_str[1]] = str_length
-            # print(ascii_code)
-            # print("end=====type_str=====")
         elif math_op:
-            # print("start=====math_op=====")
             without_tab = del_tab(math_op[0])
             split_str = without_tab.split(" ")
-            # print(split_str)
-            # print(split_str[2].isdigit())
+
             first_addr = 0
             second_addr = 0
             to_unlock = []
 
             count_var, first_addr, foo = get_addr_var(instructions, var_name_addr, to_unlock, split_str[2], count_var)
-            # if split_str[2].isdigit():
-            #     count_var += 1
-            #     name_reused_mem = str(uuid.uuid4().hex)
-            #     reused_mem = count_var
-            #     for i in var_name_addr.items():
-            #         if i[1].reused:
-            #             count_var -= 1
-            #             reused_mem = i[1].addr
-            #             name_reused_mem = i[0]
-            #             break
-            #     to_unlock.append(name_reused_mem)
-            #     var_name_addr[name_reused_mem] = Addr(reused_mem, False)
-            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, split_str[2]))
-            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, reused_mem))
-            #     first_addr = reused_mem
-            # else:
-            #     first_addr = var_name_addr[split_str[2]].addr
+
             count_var, second_addr, foo = get_addr_var(instructions, var_name_addr, to_unlock, split_str[4], count_var)
-            # if split_str[4].isdigit():
-            #     count_var += 1
-            #     name_reused_mem = str(uuid.uuid4().hex)
-            #     reused_mem = count_var
-            #     for i in var_name_addr.items():
-            #         if i[1].reused:
-            #             count_var -= 1
-            #             reused_mem = i[1].addr
-            #             name_reused_mem = i[0]
-            #             break
-            #     to_unlock.append(name_reused_mem)
-            #     var_name_addr[name_reused_mem] = Addr(reused_mem, False)
-            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, split_str[4]))
-            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, reused_mem))
-            #     second_addr = reused_mem
-            # else:
-            #     second_addr = var_name_addr[split_str[4]].addr
 
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, first_addr))
             instructions.append(Instruction(symbol2opcode(split_str[3]), AddrMode.DIRECT, second_addr))
@@ -190,10 +144,7 @@ def code2instructions(text: str) -> list[Instruction]:
                 var_name_addr[name] = Addr(var_name_addr[name].addr, True)
             to_unlock.clear()
             
-            # print(f"переменная: {split_str[0]} в памяти тут: {var_name_addr[split_str[0]]}")
-            # print("end=====math_op=====")
         elif if_statement:
-            # print("start=====if_statement=====")
             without_tab = del_tab(if_statement[0])
             split_str = without_tab.split(" ")
 
@@ -210,78 +161,38 @@ def code2instructions(text: str) -> list[Instruction]:
             instructions.append(Instruction(Opcode.CMP, AddrMode.DIRECT, addr3))
             instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, 7777777))
             BEQ_pos = len(instructions) - 1
-
+ 
             count_var, addr4, none = get_addr_var(instructions, var_name_addr, to_unlock, split_str[7], count_var, start)
             count_var, addr5, none = get_addr_var(instructions, var_name_addr, to_unlock, split_str[9], count_var, start)
             count_var, addr6, none = get_addr_var(instructions, var_name_addr, to_unlock, split_str[11][:-1], count_var, start)
 
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, addr4))
             instructions.append(Instruction(symbol2opcode(split_str[8]), AddrMode.DIRECT, addr5))
-            instructions.append(Instruction(symbol2opcode(Opcode.CMP), AddrMode.DIRECT, addr6))
+            instructions.append(Instruction(Opcode.CMP, AddrMode.DIRECT, addr6))
             instructions.append(Instruction(Opcode.BNE, AddrMode.DIRECT, 7777777))
             end = len(instructions) - 1
 
             instructions[BEQ_pos] = Instruction(instructions[BEQ_pos].opcode, instructions[BEQ_pos].addr_mode, end+1)
 
-            # print(split_str)
-
             list_of_while_if.append(If_statement("if", end))
-            # count_var += 1
         elif while_statement:
-            # print("start=====while_statement=====")
             without_tab = del_tab(while_statement[0])
             split_str = without_tab.split(" ")
-            # print(split_str)
 
             first_addr = 0
             second_addr = 0
             to_unlock = []
             start = 0
             end = 0
+
             count_var, first_addr, start = get_addr_var(instructions, var_name_addr, to_unlock, split_str[1][1:], count_var, start)
-            # if split_str[1][1:].isdigit():
-            #     count_var += 1
-            #     name_reused_mem = str(uuid.uuid4().hex)
-            #     reused_mem = count_var
-            #     for i in var_name_addr.items():
-            #         if i[1].reused:
-            #             count_var -= 1
-            #             reused_mem = i[1].addr
-            #             name_reused_mem = i[0]
-            #             break
-            #     to_unlock.append(name_reused_mem)
-            #     var_name_addr[name_reused_mem] = Addr(reused_mem, False)
-            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, split_str[1][1:]))
-            #     if start == 0: start = len(instructions) - 1
-            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, reused_mem))
-            #     first_addr = reused_mem
-            # else:
-            #     first_addr = var_name_addr[split_str[1][1:]].addr
+     
             count_var, second_addr, start = get_addr_var(instructions, var_name_addr, to_unlock, split_str[3][:-1], count_var, start)
-            # if split_str[3][:-1].isdigit():
-            #     count_var += 1
-            #     name_reused_mem = str(uuid.uuid4().hex)
-            #     reused_mem = count_var
-            #     for i in var_name_addr.items():
-            #         if i[1].reused:
-            #             count_var -= 1
-            #             reused_mem = i[1].addr
-            #             name_reused_mem = i[0]
-            #             break
-            #     to_unlock.append(name_reused_mem)
-            #     var_name_addr[name_reused_mem] = Addr(reused_mem, False)
-            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, split_str[3][:-1]))
-            #     if start == 0: start = len(instructions) - 1
-            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, reused_mem))
-            #     second_addr = reused_mem
-            # else:
-            #     second_addr = var_name_addr[split_str[3][:-1]].addr
 
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, first_addr))
 
             if start == 0: start = len(instructions) - 1
             instructions.append(Instruction(Opcode.CMP, AddrMode.DIRECT, second_addr))
-            # instructions.append(Instruction(symbol2opcode(split_str[2]), AddrMode.DIRECT, second_addr))
 
             for name in to_unlock:
                 var_name_addr[name] = Addr(var_name_addr[name].addr, True)
@@ -291,19 +202,16 @@ def code2instructions(text: str) -> list[Instruction]:
             end = len(instructions) - 1
 
             list_of_while_if.append(While_statement("while", start, end))
-
-            # count_var += 1
-            # print("end=====while_statement=====")
         elif input_:
             count_var += 1
             without_tab = del_tab(input_[0])
             split_str = without_tab.split(" ")
             first_cell = var_name_addr[split_str[1]].addr
 
-            # TODO очищаем полностью пространство старой строки
-            # for i in range(first_cell, first_cell + STR_MAX_LENGTH, 1):
-            #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0))
-            #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, i))
+            # очищаем пространство старой строки
+            for i in range(first_cell, first_cell + STR_MAX_LENGTH, 1):
+                instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0))
+                instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, i))
 
             instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0)) # счетчик длины слова
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
@@ -314,7 +222,7 @@ def code2instructions(text: str) -> list[Instruction]:
 
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, INPUT_CELL)) # получили входные данные
             instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверили на ноль
-            instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
+            instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12)) # если ноль, то в конец всех эппэндов
             instructions.append(Instruction(Opcode.ST, AddrMode.INDIRECT, count_var + 1)) # сохранили в первую ячейку введенный символ
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
             instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
@@ -322,34 +230,24 @@ def code2instructions(text: str) -> list[Instruction]:
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
             instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили адрес ячейки на 1(указываем на следующую)
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
-            instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)) # проверяем, чтобы строка была до 16 символов
+            instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
+            instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)) # проверяем, чтобы строка была до пределов
             instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
-            instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 12))
+            instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 13))
 
             count_var += 1
-            # print("start=====input=====")
         elif output_:
-            # print("start=====output=====")
             without_tab = del_tab(output_[0])
             split_str = without_tab.split(" ")
-            print(output_[0])
             if output_:
                 str_length = None
                 try:
-                    print(len(str_name_length))
-                    print(str_name_length[split_str[1]])
-                    print(str_name_length)
                     if len(str_name_length) != 0: str_length = str_name_length[split_str[1]]
                 except KeyError:
                     pass
                 # вывод строки
                 count_var += 1
                 if str_length != None:
-                    print("вывод строки")
-                    print(var_name_addr[split_str[1]].addr)
-                    print(str_length)
-                    print(var_name_addr)
-
                     first_cell = var_name_addr[split_str[1]].addr
 
                     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0)) # счетчик длины слова
@@ -361,7 +259,7 @@ def code2instructions(text: str) -> list[Instruction]:
 
                     instructions.append(Instruction(Opcode.LD, AddrMode.INDIRECT, count_var + 1)) # загружаем значение первой ячейки в ACC
                     instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверяем на ноль
-                    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
+                    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12)) # если ноль, то в конец всех эппэндов
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL)) # записываем значение в ячейку вывода
                     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
                     instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
@@ -369,31 +267,26 @@ def code2instructions(text: str) -> list[Instruction]:
                     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
                     instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили адрес ячейки на 1(указываем на следующую)
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
+                    instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
                     instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)) # проверяем, чтобы строка была до 16 символов
                     instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
-                    instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 12))
+                    instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 13))
                     count_var += 1
                 # вывод числа
                 else:
-                    print("вывод числа")
                     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, var_name_addr[split_str[1]].addr))
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL))
         elif end_block:
-            # print("start======end_block=====")
             counter_end_block += 1
             pos = len(list_of_while_if) - counter_end_block
             obj_by_pos = list_of_while_if[pos]
-            # print(obj_by_pos)
             if obj_by_pos.typ == "while":
                 last_pos_inst = len(instructions) + 1
                 instructions[obj_by_pos.end] = Instruction(instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst)
                 instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, obj_by_pos.start))
             if obj_by_pos.typ == "if":
                 last_pos_inst = len(instructions)
-                # print("lol")
-                # print(instructions[obj_by_pos.end])
                 instructions[obj_by_pos.end] = Instruction(instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst)
-            # print("end======end_block=====")
         else:
             assert False, "Невалидный синтаксис программы"
 
@@ -401,12 +294,9 @@ def code2instructions(text: str) -> list[Instruction]:
 
     # перенос адресаций данных в конец инструкций
     for e, i in enumerate(instructions):
-        # print(e, i)
         if ((i.opcode == Opcode.LD or i.opcode == Opcode.ST or i.opcode == Opcode.ADD or i.opcode == Opcode.SUB or i.opcode == Opcode.DIV
             or i.opcode == Opcode.MUL or i.opcode == Opcode.MOD or i.opcode == Opcode.CMP) and (i.addr_mode == AddrMode.DIRECT or i.addr_mode == AddrMode.INDIRECT) and i.arg != INPUT_CELL and i.arg != OUTPUT_CELL):
-            # print(e, i)
             instructions[e] = Instruction(i.opcode, i.addr_mode, i.arg + len(instructions))
-    
     for i in move_addr:
         instructions[i] = Instruction(instructions[i].opcode, instructions[i].addr_mode, instructions[i].arg + len(instructions))
 
@@ -427,10 +317,7 @@ def instructions2binary(instructions: list) -> bytes:
             else:
                 binary += struct.pack(">Bi", (code.opcode.value << 2 | code.addr_mode.value), code.arg)
             continue
-        print("lol")
-        print(code)
         binary += struct.pack(">i", code)
-    print(binary)
     return binary
 
 def main(input_file: str, output_file: str, output_debug_file: str):
@@ -452,27 +339,18 @@ def main(input_file: str, output_file: str, output_debug_file: str):
             f.write(f'{e:<15}{binary[e * 5 : e * 5 + 5].hex():<15}{i}\n')
 
 if __name__ == '__main__':
-
-    prob1 =  "int  sum  =  321\n"+"int x = 143\n"+"while (x < 1000) {\n"+"    if (x % 3 == 0 || x % 5 == 0) {\n"+"        sum = sum + x\n"+"    }\n"+"    x = x + 1\n"+"}\n"+">> sum"
-    int_print = "int num = 4324\n"+">> num"
-    # text2instructions(int_print)
-
-    cat = "str string = \"\"\n"+"while (1 < 2) {\n"+"<< string\n"+">> string\n"+"}"
-    hello_world = "str string = \"Hello, world!\"\n"+">> string"
-    whats_name = "str str = \"What's your name?\"\n"+"str str_two = \"Hello, \"\n"+"str name = \"\"\n"+"<< name\n"+">> str_two\n"+">> name"
-    # print("if (x < 1) {\n    x = x + 1\n}")
-
-    # text2instructions(cat)
-    # text2instructions(hello_world)
-    # code2instructions(whats_name)
-
     # logging.getLogger().setLevel(logging.DEBUG)
     # assert len(sys.argv) == 4, 'Wrong arguments: machine.py <binary_file> <input_file>'
     # _, input_file, output_file, output_debug_file = sys.argv
-    input_file = "tests/golden/input.txt"
-    output_file = "tests/golden/output.txt"
-    output_debug_file = "tests/golden/debug.txt"
+    
+    # input_file = "tests/golden/input.txt"
+    # output_file = "tests/golden/output.txt"
+    # output_debug_file = "tests/golden/debug.txt"
+    # input_file = "tests/golden/input2.txt"
+    # output_file = "tests/golden/output2.txt"
+    # output_debug_file = "tests/golden/debug2.txt"
+    input_file = "tests/golden/input3.txt"
+    output_file = "tests/golden/output3.txt"
+    output_debug_file = "tests/golden/debug3.txt"
     main(input_file, output_file, output_debug_file)
 
-    print(sys.argv)
-    # text2instructions(prob1)
