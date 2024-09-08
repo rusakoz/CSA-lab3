@@ -2,6 +2,8 @@ from enum import Enum
 import struct
 from typing import NamedTuple
 
+INPUT_CELL = 2**11 - 2
+OUTPUT_CELL = 2**11 - 1
 
 class Opcode(Enum):
     LD: int = 0
@@ -45,7 +47,7 @@ def write_code(filename, binary_code):
         file.write(binary_code)
 
 
-def read_code(filename) -> list:
+def binary2code(filename) -> list:
     machine_code = []
     with open(filename, "rb") as file:
         while bin_code_instr := file.read(1):
@@ -61,8 +63,13 @@ def read_code(filename) -> list:
             mode = op_and_mode[0] & 0b11
             arg = file.read(4)
             assert len(arg) == 4, "Бинарный файл невалиден"
-            arg = struct.unpack('>i', arg)
+            print(AddrMode(mode))
+            if AddrMode(mode) == AddrMode.DIRECT:
+                arg = struct.unpack('>I', arg)
+            else:
+                arg = struct.unpack('>i', arg)
             machine_code.append(Instruction(Opcode(op), AddrMode(mode), arg[0]))
+        # TODO мб, строковые литералы будут сохраняться не через LD ST
         while bin_code_data := file.read(4):
             assert len(bin_code_data) == 4, "Бинарный файл невалиден"
             # print(bin_code_data)
@@ -72,4 +79,4 @@ def read_code(filename) -> list:
     # print(machine_code)
     return machine_code
 
-# read_code("write")
+# print(read_code("tests/golden/output.txt"))

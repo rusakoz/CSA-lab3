@@ -1,12 +1,13 @@
+import logging
 import struct
 import re
+import sys
 from typing import NamedTuple
 import uuid
-from ..isa import AddrMode, Instruction, Opcode
+from ..isa import AddrMode, Instruction, Opcode, INPUT_CELL, OUTPUT_CELL
 
 def symbols():
     return {"+", "-", "*", "/", "%", ">", "<", "==", "!="}
-
 
 def symbol2opcode(symbol) -> Opcode:
     return {
@@ -71,15 +72,15 @@ def get_addr_var(instructions: list, var_name_addr: dict, to_unlock: list, var: 
         addr = var_name_addr[var].addr
     return count_var, addr, start
 
-def text2instructions(text: str) -> list[Instruction]:
-    STR_MAX_LENGTH = 16
+def code2instructions(text: str) -> list[Instruction]:
+    STR_MAX_LENGTH = 24
     end_blocks = count_end_blocks(text)
     counter_end_block = 0
     list_of_while_if = []
     instructions = []
     var_name_addr = {}
     str_name_length = {}
-    move_addr = 0
+    move_addr = []
     count_var = -1
     count = -1
     for elem in text.splitlines():
@@ -119,7 +120,9 @@ def text2instructions(text: str) -> list[Instruction]:
             count_var += 1
             without_tab = del_tab(type_str[0])
             split_str = without_tab.split(" ", 3)
-            # print(split_str)
+            
+            assert (len(split_str[3][1:-1]) <= STR_MAX_LENGTH), f"Превышен лимит {STR_MAX_LENGTH} строки \"{split_str[3][1:-1]}\""
+
             ascii_code = list(split_str[3][1:-1].encode('cp1251'))
             start_pos = count_var
             var_name_addr[split_str[1]] = Addr(start_pos, False)
@@ -297,7 +300,7 @@ def text2instructions(text: str) -> list[Instruction]:
             split_str = without_tab.split(" ")
             first_cell = var_name_addr[split_str[1]].addr
 
-            # TODO очищаем полностью пространство старой строки + вывод длины строки в константу
+            # TODO очищаем полностью пространство старой строки
             # for i in range(first_cell, first_cell + STR_MAX_LENGTH, 1):
             #     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, 0))
             #     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, i))
@@ -306,12 +309,13 @@ def text2instructions(text: str) -> list[Instruction]:
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
 
             instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, first_cell)) # адрес первой ячейки строки
+            move_addr.append(len(instructions) - 1) # для сдвига адреса
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
 
-            instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, 2**32 - 1)) # получили входные данные
+            instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, INPUT_CELL)) # получили входные данные
             instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверили на ноль
             instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
-            instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1)) # сохранили в первую ячейку введенный символ
+            instructions.append(Instruction(Opcode.ST, AddrMode.INDIRECT, count_var + 1)) # сохранили в первую ячейку введенный символ
             instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
             instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
             instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
@@ -331,7 +335,6 @@ def text2instructions(text: str) -> list[Instruction]:
             print(output_[0])
             if output_:
                 str_length = None
-                is_str = False
                 try:
                     print(len(str_name_length))
                     print(str_name_length[split_str[1]])
@@ -340,7 +343,6 @@ def text2instructions(text: str) -> list[Instruction]:
                 except KeyError:
                     pass
                 # вывод строки
-                # TODO переделать вывод строк
                 count_var += 1
                 if str_length != None:
                     print("вывод строки")
@@ -354,12 +356,13 @@ def text2instructions(text: str) -> list[Instruction]:
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
 
                     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, first_cell)) # адрес первой ячейки строки
+                    move_addr.append(len(instructions) - 1) # для сдвига адреса
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
 
-                    instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1)) # загружаем значение первой ячейки в ACC
+                    instructions.append(Instruction(Opcode.LD, AddrMode.INDIRECT, count_var + 1)) # загружаем значение первой ячейки в ACC
                     instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0)) # проверяем на ноль
                     instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 11)) # если ноль, то в конец всех эппэндов
-                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, 2**32)) # записываем значение в ячейку вывода
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL)) # записываем значение в ячейку вывода
                     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
                     instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)) # увеличили счетчик длины слова
                     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
@@ -374,9 +377,7 @@ def text2instructions(text: str) -> list[Instruction]:
                 else:
                     print("вывод числа")
                     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, var_name_addr[split_str[1]].addr))
-                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, 2**32))
-            
-
+                    instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL))
         elif end_block:
             # print("start======end_block=====")
             counter_end_block += 1
@@ -396,28 +397,59 @@ def text2instructions(text: str) -> list[Instruction]:
         else:
             assert False, "Невалидный синтаксис программы"
 
-        # assert if_statement, "Невалидный синтаксис программы" + str(if_statement)
+    instructions.append(Instruction(Opcode.HLT, None, None))
 
-    # print(var_name_addr)
-    # print(str_name_length)
-    print(instructions)
+    # перенос адресаций данных в конец инструкций
+    for e, i in enumerate(instructions):
+        # print(e, i)
+        if ((i.opcode == Opcode.LD or i.opcode == Opcode.ST or i.opcode == Opcode.ADD or i.opcode == Opcode.SUB or i.opcode == Opcode.DIV
+            or i.opcode == Opcode.MUL or i.opcode == Opcode.MOD or i.opcode == Opcode.CMP) and (i.addr_mode == AddrMode.DIRECT or i.addr_mode == AddrMode.INDIRECT) and i.arg != INPUT_CELL and i.arg != OUTPUT_CELL):
+            # print(e, i)
+            instructions[e] = Instruction(i.opcode, i.addr_mode, i.arg + len(instructions))
+    
+    for i in move_addr:
+        instructions[i] = Instruction(instructions[i].opcode, instructions[i].addr_mode, instructions[i].arg + len(instructions))
+
     for e, i in enumerate(instructions):
         print(e, i)
-    # return instructions
+       
+    return instructions
 
-def machine2binary(machine_code: list) -> bytes:
+def instructions2binary(instructions: list) -> bytes:
     binary = b''
-    for code in machine_code:
+    for code in instructions:
         if isinstance(code, Instruction):
-            # print("was here")
             if code.opcode == Opcode.HLT:
                 binary += struct.pack(">B", (code.opcode.value << 2))
                 continue
-            binary += struct.pack(">Bi", (code.opcode.value << 2 | code.addr_mode.value), code.arg)
+            if code.addr_mode == AddrMode.DIRECT or code.addr_mode == AddrMode.INDIRECT:
+                binary += struct.pack(">BI", (code.opcode.value << 2 | code.addr_mode.value), code.arg)
+            else:
+                binary += struct.pack(">Bi", (code.opcode.value << 2 | code.addr_mode.value), code.arg)
             continue
+        print("lol")
+        print(code)
         binary += struct.pack(">i", code)
     print(binary)
     return binary
+
+def main(input_file: str, output_file: str, output_debug_file: str):
+    with open(input_file, encoding='utf-8') as file:
+        code = file.read()
+    instructions = code2instructions(code)
+    binary = instructions2binary(instructions)
+
+    with open(output_file, 'wb') as file:
+        file.write(binary)
+
+    with open(output_debug_file, 'w', encoding='utf-8') as f:
+        f.write('========INSTRUCTIONS=======\n')
+        f.write(f'{"address":<15}{"hexcode":<15}mnemonic\n')
+        for e, i in enumerate(instructions):
+            if i.opcode == Opcode.HLT:
+                f.write(f'{e:<15}{binary[e * 5 : e * 5 + 1].hex():<15}{i}\n')
+                continue
+            f.write(f'{e:<15}{binary[e * 5 : e * 5 + 5].hex():<15}{i}\n')
 
 if __name__ == '__main__':
 
@@ -432,5 +464,15 @@ if __name__ == '__main__':
 
     # text2instructions(cat)
     # text2instructions(hello_world)
-    text2instructions(whats_name)
+    # code2instructions(whats_name)
+
+    # logging.getLogger().setLevel(logging.DEBUG)
+    # assert len(sys.argv) == 4, 'Wrong arguments: machine.py <binary_file> <input_file>'
+    # _, input_file, output_file, output_debug_file = sys.argv
+    input_file = "tests/golden/input.txt"
+    output_file = "tests/golden/output.txt"
+    output_debug_file = "tests/golden/debug.txt"
+    main(input_file, output_file, output_debug_file)
+
+    print(sys.argv)
     # text2instructions(prob1)
