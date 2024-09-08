@@ -1,0 +1,1142 @@
+in_source: |-
+  str string = ""
+  while (1 < 2) {
+      << string
+      >> string
+  }
+in_stdin: |
+  I like architecture computer
+out_code: |
+  =============INSTRUCTIONS============
+  <address>       <HEXCODE>    <mnemonic>
+     0          0200000001       LD #1
+     1          0400000076       ST 118
+     2          0200000002       LD #2
+     3          0400000077       ST 119
+     4          0000000076       LD 118
+     5          1c00000077       CMP 119
+     6          300000005c       BG 92
+     7          0200000000       LD #0
+     8          040000005d       ST 93
+     9          0200000000       LD #0
+     10         040000005e       ST 94
+     11         0200000000       LD #0
+     12         040000005f       ST 95
+     13         0200000000       LD #0
+     14         0400000060       ST 96
+     15         0200000000       LD #0
+     16         0400000061       ST 97
+     17         0200000000       LD #0
+     18         0400000062       ST 98
+     19         0200000000       LD #0
+     20         0400000063       ST 99
+     21         0200000000       LD #0
+     22         0400000064       ST 100
+     23         0200000000       LD #0
+     24         0400000065       ST 101
+     25         0200000000       LD #0
+     26         0400000066       ST 102
+     27         0200000000       LD #0
+     28         0400000067       ST 103
+     29         0200000000       LD #0
+     30         0400000068       ST 104
+     31         0200000000       LD #0
+     32         0400000069       ST 105
+     33         0200000000       LD #0
+     34         040000006a       ST 106
+     35         0200000000       LD #0
+     36         040000006b       ST 107
+     37         0200000000       LD #0
+     38         040000006c       ST 108
+     39         0200000000       LD #0
+     40         040000006d       ST 109
+     41         0200000000       LD #0
+     42         040000006e       ST 110
+     43         0200000000       LD #0
+     44         040000006f       ST 111
+     45         0200000000       LD #0
+     46         0400000070       ST 112
+     47         0200000000       LD #0
+     48         0400000071       ST 113
+     49         0200000000       LD #0
+     50         0400000072       ST 114
+     51         0200000000       LD #0
+     52         0400000073       ST 115
+     53         0200000000       LD #0
+     54         0400000074       ST 116
+     55         0200000000       LD #0
+     56         0400000078       ST 120
+     57         020000005d       LD #93
+     58         0400000079       ST 121
+     59         00000007fe       LD 2046
+     60         1e00000000       CMP #0
+     61         2400000049       BEQ 73
+     62         0500000079       ST ~121
+     63         0000000078       LD 120
+     64         0a00000001       ADD #1
+     65         0400000078       ST 120
+     66         0000000079       LD 121
+     67         0a00000001       ADD #1
+     68         0400000079       ST 121
+     69         0000000078       LD 120
+     70         1e00000018       CMP #24
+     71         2400000049       BEQ 73
+     72         200000003b       JMP 59
+     73         0200000000       LD #0
+     74         040000007a       ST 122
+     75         020000005d       LD #93
+     76         040000007b       ST 123
+     77         010000007b       LD ~123
+     78         1e00000000       CMP #0
+     79         240000005b       BEQ 91
+     80         04000007ff       ST 2047
+     81         000000007a       LD 122
+     82         0a00000001       ADD #1
+     83         040000007a       ST 122
+     84         000000007b       LD 123
+     85         0a00000001       ADD #1
+     86         040000007b       ST 123
+     87         000000007a       LD 122
+     88         1e00000018       CMP #24
+     89         240000005b       BEQ 91
+     90         200000004d       JMP 77
+     91         2000000002       JMP 2
+     92         34               HLT
+out_stdout: |
+  source LoC: 5 code instr: 93 code bytes: 461
+  ============================================================
+  output: I like architecture computer
+  program_counter:  971
+  ticks:  1543
+out_log: |
+  DEBUG   machine:simulation    TICK:    0PC:    0ADDR:    0MEM_OUT:    0ALU:    0ACC:    0LD #1
+  DEBUG   machine:simulation    TICK:    1PC:    1ADDR:    0MEM_OUT:    0ALU:    1ACC:    1ST 118
+  DEBUG   machine:simulation    TICK:    3PC:    2ADDR:  118MEM_OUT:    0ALU:    1ACC:    1LD #2
+  DEBUG   machine:simulation    TICK:    4PC:    3ADDR:  118MEM_OUT:    0ALU:    2ACC:    2ST 119
+  DEBUG   machine:simulation    TICK:    6PC:    4ADDR:  119MEM_OUT:    0ALU:    2ACC:    2LD 118
+  DEBUG   machine:simulation    TICK:    8PC:    5ADDR:  118MEM_OUT:    1ALU:    1ACC:    1CMP 119
+  DEBUG   machine:simulation    TICK:   10PC:    6ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1BG 92
+  DEBUG   machine:simulation    TICK:   11PC:    7ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1LD #0
+  DEBUG   machine:simulation    TICK:   12PC:    8ADDR:  119MEM_OUT:    2ALU:    0ACC:    0ST 93
+  DEBUG   machine:simulation    TICK:   14PC:    9ADDR:   93MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   15PC:   10ADDR:   93MEM_OUT:    2ALU:    0ACC:    0ST 94
+  DEBUG   machine:simulation    TICK:   17PC:   11ADDR:   94MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   18PC:   12ADDR:   94MEM_OUT:    2ALU:    0ACC:    0ST 95
+  DEBUG   machine:simulation    TICK:   20PC:   13ADDR:   95MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   21PC:   14ADDR:   95MEM_OUT:    2ALU:    0ACC:    0ST 96
+  DEBUG   machine:simulation    TICK:   23PC:   15ADDR:   96MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   24PC:   16ADDR:   96MEM_OUT:    2ALU:    0ACC:    0ST 97
+  DEBUG   machine:simulation    TICK:   26PC:   17ADDR:   97MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   27PC:   18ADDR:   97MEM_OUT:    2ALU:    0ACC:    0ST 98
+  DEBUG   machine:simulation    TICK:   29PC:   19ADDR:   98MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   30PC:   20ADDR:   98MEM_OUT:    2ALU:    0ACC:    0ST 99
+  DEBUG   machine:simulation    TICK:   32PC:   21ADDR:   99MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   33PC:   22ADDR:   99MEM_OUT:    2ALU:    0ACC:    0ST 100
+  DEBUG   machine:simulation    TICK:   35PC:   23ADDR:  100MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   36PC:   24ADDR:  100MEM_OUT:    2ALU:    0ACC:    0ST 101
+  DEBUG   machine:simulation    TICK:   38PC:   25ADDR:  101MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   39PC:   26ADDR:  101MEM_OUT:    2ALU:    0ACC:    0ST 102
+  DEBUG   machine:simulation    TICK:   41PC:   27ADDR:  102MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   42PC:   28ADDR:  102MEM_OUT:    2ALU:    0ACC:    0ST 103
+  DEBUG   machine:simulation    TICK:   44PC:   29ADDR:  103MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   45PC:   30ADDR:  103MEM_OUT:    2ALU:    0ACC:    0ST 104
+  DEBUG   machine:simulation    TICK:   47PC:   31ADDR:  104MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   48PC:   32ADDR:  104MEM_OUT:    2ALU:    0ACC:    0ST 105
+  DEBUG   machine:simulation    TICK:   50PC:   33ADDR:  105MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   51PC:   34ADDR:  105MEM_OUT:    2ALU:    0ACC:    0ST 106
+  DEBUG   machine:simulation    TICK:   53PC:   35ADDR:  106MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   54PC:   36ADDR:  106MEM_OUT:    2ALU:    0ACC:    0ST 107
+  DEBUG   machine:simulation    TICK:   56PC:   37ADDR:  107MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   57PC:   38ADDR:  107MEM_OUT:    2ALU:    0ACC:    0ST 108
+  DEBUG   machine:simulation    TICK:   59PC:   39ADDR:  108MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   60PC:   40ADDR:  108MEM_OUT:    2ALU:    0ACC:    0ST 109
+  DEBUG   machine:simulation    TICK:   62PC:   41ADDR:  109MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   63PC:   42ADDR:  109MEM_OUT:    2ALU:    0ACC:    0ST 110
+  DEBUG   machine:simulation    TICK:   65PC:   43ADDR:  110MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   66PC:   44ADDR:  110MEM_OUT:    2ALU:    0ACC:    0ST 111
+  DEBUG   machine:simulation    TICK:   68PC:   45ADDR:  111MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   69PC:   46ADDR:  111MEM_OUT:    2ALU:    0ACC:    0ST 112
+  DEBUG   machine:simulation    TICK:   71PC:   47ADDR:  112MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   72PC:   48ADDR:  112MEM_OUT:    2ALU:    0ACC:    0ST 113
+  DEBUG   machine:simulation    TICK:   74PC:   49ADDR:  113MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   75PC:   50ADDR:  113MEM_OUT:    2ALU:    0ACC:    0ST 114
+  DEBUG   machine:simulation    TICK:   77PC:   51ADDR:  114MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   78PC:   52ADDR:  114MEM_OUT:    2ALU:    0ACC:    0ST 115
+  DEBUG   machine:simulation    TICK:   80PC:   53ADDR:  115MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   81PC:   54ADDR:  115MEM_OUT:    2ALU:    0ACC:    0ST 116
+  DEBUG   machine:simulation    TICK:   83PC:   55ADDR:  116MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK:   84PC:   56ADDR:  116MEM_OUT:    2ALU:    0ACC:    0ST 120
+  DEBUG   machine:simulation    TICK:   86PC:   57ADDR:  120MEM_OUT:    2ALU:    0ACC:    0LD #93
+  DEBUG   machine:simulation    TICK:   87PC:   58ADDR:  120MEM_OUT:    2ALU:   93ACC:   93ST 121
+  DEBUG   machine:simulation    TICK:   89PC:   59ADDR:  121MEM_OUT:    2ALU:   93ACC:   93LD 2046
+  DEBUG   machine:signal_latch_acc input: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 93
+  DEBUG   machine:simulation    TICK:   91PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   73CMP #0
+  DEBUG   machine:simulation    TICK:   92PC:   61ADDR: 2046MEM_OUT:    0ALU:   73ACC:   73BEQ 73
+  DEBUG   machine:simulation    TICK:   93PC:   62ADDR: 2046MEM_OUT:    0ALU:   73ACC:   73ST ~121
+  DEBUG   machine:simulation    TICK:   97PC:   63ADDR:   93MEM_OUT:   93ALU:   73ACC:   73LD 120
+  DEBUG   machine:simulation    TICK:   99PC:   64ADDR:  120MEM_OUT:    0ALU:    0ACC:    0ADD #1
+  DEBUG   machine:simulation    TICK:  100PC:   65ADDR:  120MEM_OUT:    0ALU:    1ACC:    1ST 120
+  DEBUG   machine:simulation    TICK:  102PC:   66ADDR:  120MEM_OUT:    0ALU:    1ACC:    1LD 121
+  DEBUG   machine:simulation    TICK:  104PC:   67ADDR:  121MEM_OUT:   93ALU:   93ACC:   93ADD #1
+  DEBUG   machine:simulation    TICK:  105PC:   68ADDR:  121MEM_OUT:   93ALU:   94ACC:   94ST 121
+  DEBUG   machine:simulation    TICK:  107PC:   69ADDR:  121MEM_OUT:   93ALU:   94ACC:   94LD 120
+  DEBUG   machine:simulation    TICK:  109PC:   70ADDR:  120MEM_OUT:    1ALU:    1ACC:    1CMP #24
+  DEBUG   machine:simulation    TICK:  110PC:   71ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1BEQ 73
+  DEBUG   machine:simulation    TICK:  111PC:   72ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1JMP 59
+  DEBUG   machine:simulation    TICK:  112PC:   59ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1LD 2046
+  DEBUG   machine:signal_latch_acc input: "[32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 1
+  DEBUG   machine:simulation    TICK:  114PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK:  115PC:   61ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32BEQ 73
+  DEBUG   machine:simulation    TICK:  116PC:   62ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32ST ~121
+  DEBUG   machine:simulation    TICK:  120PC:   63ADDR:   94MEM_OUT:   94ALU:   32ACC:   32LD 120
+  DEBUG   machine:simulation    TICK:  122PC:   64ADDR:  120MEM_OUT:    1ALU:    1ACC:    1ADD #1
+  DEBUG   machine:simulation    TICK:  123PC:   65ADDR:  120MEM_OUT:    1ALU:    2ACC:    2ST 120
+  DEBUG   machine:simulation    TICK:  125PC:   66ADDR:  120MEM_OUT:    1ALU:    2ACC:    2LD 121
+  DEBUG   machine:simulation    TICK:  127PC:   67ADDR:  121MEM_OUT:   94ALU:   94ACC:   94ADD #1
+  DEBUG   machine:simulation    TICK:  128PC:   68ADDR:  121MEM_OUT:   94ALU:   95ACC:   95ST 121
+  DEBUG   machine:simulation    TICK:  130PC:   69ADDR:  121MEM_OUT:   94ALU:   95ACC:   95LD 120
+  DEBUG   machine:simulation    TICK:  132PC:   70ADDR:  120MEM_OUT:    2ALU:    2ACC:    2CMP #24
+  DEBUG   machine:simulation    TICK:  133PC:   71ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2BEQ 73
+  DEBUG   machine:simulation    TICK:  134PC:   72ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2JMP 59
+  DEBUG   machine:simulation    TICK:  135PC:   59ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2LD 2046
+  DEBUG   machine:signal_latch_acc input: "[108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 2
+  DEBUG   machine:simulation    TICK:  137PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  108CMP #0
+  DEBUG   machine:simulation    TICK:  138PC:   61ADDR: 2046MEM_OUT:    0ALU:  108ACC:  108BEQ 73
+  DEBUG   machine:simulation    TICK:  139PC:   62ADDR: 2046MEM_OUT:    0ALU:  108ACC:  108ST ~121
+  DEBUG   machine:simulation    TICK:  143PC:   63ADDR:   95MEM_OUT:   95ALU:  108ACC:  108LD 120
+  DEBUG   machine:simulation    TICK:  145PC:   64ADDR:  120MEM_OUT:    2ALU:    2ACC:    2ADD #1
+  DEBUG   machine:simulation    TICK:  146PC:   65ADDR:  120MEM_OUT:    2ALU:    3ACC:    3ST 120
+  DEBUG   machine:simulation    TICK:  148PC:   66ADDR:  120MEM_OUT:    2ALU:    3ACC:    3LD 121
+  DEBUG   machine:simulation    TICK:  150PC:   67ADDR:  121MEM_OUT:   95ALU:   95ACC:   95ADD #1
+  DEBUG   machine:simulation    TICK:  151PC:   68ADDR:  121MEM_OUT:   95ALU:   96ACC:   96ST 121
+  DEBUG   machine:simulation    TICK:  153PC:   69ADDR:  121MEM_OUT:   95ALU:   96ACC:   96LD 120
+  DEBUG   machine:simulation    TICK:  155PC:   70ADDR:  120MEM_OUT:    3ALU:    3ACC:    3CMP #24
+  DEBUG   machine:simulation    TICK:  156PC:   71ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3BEQ 73
+  DEBUG   machine:simulation    TICK:  157PC:   72ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3JMP 59
+  DEBUG   machine:simulation    TICK:  158PC:   59ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3LD 2046
+  DEBUG   machine:signal_latch_acc input: "[105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 3
+  DEBUG   machine:simulation    TICK:  160PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  105CMP #0
+  DEBUG   machine:simulation    TICK:  161PC:   61ADDR: 2046MEM_OUT:    0ALU:  105ACC:  105BEQ 73
+  DEBUG   machine:simulation    TICK:  162PC:   62ADDR: 2046MEM_OUT:    0ALU:  105ACC:  105ST ~121
+  DEBUG   machine:simulation    TICK:  166PC:   63ADDR:   96MEM_OUT:   96ALU:  105ACC:  105LD 120
+  DEBUG   machine:simulation    TICK:  168PC:   64ADDR:  120MEM_OUT:    3ALU:    3ACC:    3ADD #1
+  DEBUG   machine:simulation    TICK:  169PC:   65ADDR:  120MEM_OUT:    3ALU:    4ACC:    4ST 120
+  DEBUG   machine:simulation    TICK:  171PC:   66ADDR:  120MEM_OUT:    3ALU:    4ACC:    4LD 121
+  DEBUG   machine:simulation    TICK:  173PC:   67ADDR:  121MEM_OUT:   96ALU:   96ACC:   96ADD #1
+  DEBUG   machine:simulation    TICK:  174PC:   68ADDR:  121MEM_OUT:   96ALU:   97ACC:   97ST 121
+  DEBUG   machine:simulation    TICK:  176PC:   69ADDR:  121MEM_OUT:   96ALU:   97ACC:   97LD 120
+  DEBUG   machine:simulation    TICK:  178PC:   70ADDR:  120MEM_OUT:    4ALU:    4ACC:    4CMP #24
+  DEBUG   machine:simulation    TICK:  179PC:   71ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4BEQ 73
+  DEBUG   machine:simulation    TICK:  180PC:   72ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4JMP 59
+  DEBUG   machine:simulation    TICK:  181PC:   59ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4LD 2046
+  DEBUG   machine:signal_latch_acc input: "[107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 4
+  DEBUG   machine:simulation    TICK:  183PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  107CMP #0
+  DEBUG   machine:simulation    TICK:  184PC:   61ADDR: 2046MEM_OUT:    0ALU:  107ACC:  107BEQ 73
+  DEBUG   machine:simulation    TICK:  185PC:   62ADDR: 2046MEM_OUT:    0ALU:  107ACC:  107ST ~121
+  DEBUG   machine:simulation    TICK:  189PC:   63ADDR:   97MEM_OUT:   97ALU:  107ACC:  107LD 120
+  DEBUG   machine:simulation    TICK:  191PC:   64ADDR:  120MEM_OUT:    4ALU:    4ACC:    4ADD #1
+  DEBUG   machine:simulation    TICK:  192PC:   65ADDR:  120MEM_OUT:    4ALU:    5ACC:    5ST 120
+  DEBUG   machine:simulation    TICK:  194PC:   66ADDR:  120MEM_OUT:    4ALU:    5ACC:    5LD 121
+  DEBUG   machine:simulation    TICK:  196PC:   67ADDR:  121MEM_OUT:   97ALU:   97ACC:   97ADD #1
+  DEBUG   machine:simulation    TICK:  197PC:   68ADDR:  121MEM_OUT:   97ALU:   98ACC:   98ST 121
+  DEBUG   machine:simulation    TICK:  199PC:   69ADDR:  121MEM_OUT:   97ALU:   98ACC:   98LD 120
+  DEBUG   machine:simulation    TICK:  201PC:   70ADDR:  120MEM_OUT:    5ALU:    5ACC:    5CMP #24
+  DEBUG   machine:simulation    TICK:  202PC:   71ADDR:  120MEM_OUT:    5ALU:  -19ACC:    5BEQ 73
+  DEBUG   machine:simulation    TICK:  203PC:   72ADDR:  120MEM_OUT:    5ALU:  -19ACC:    5JMP 59
+  DEBUG   machine:simulation    TICK:  204PC:   59ADDR:  120MEM_OUT:    5ALU:  -19ACC:    5LD 2046
+  DEBUG   machine:signal_latch_acc input: "[101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 5
+  DEBUG   machine:simulation    TICK:  206PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK:  207PC:   61ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101BEQ 73
+  DEBUG   machine:simulation    TICK:  208PC:   62ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101ST ~121
+  DEBUG   machine:simulation    TICK:  212PC:   63ADDR:   98MEM_OUT:   98ALU:  101ACC:  101LD 120
+  DEBUG   machine:simulation    TICK:  214PC:   64ADDR:  120MEM_OUT:    5ALU:    5ACC:    5ADD #1
+  DEBUG   machine:simulation    TICK:  215PC:   65ADDR:  120MEM_OUT:    5ALU:    6ACC:    6ST 120
+  DEBUG   machine:simulation    TICK:  217PC:   66ADDR:  120MEM_OUT:    5ALU:    6ACC:    6LD 121
+  DEBUG   machine:simulation    TICK:  219PC:   67ADDR:  121MEM_OUT:   98ALU:   98ACC:   98ADD #1
+  DEBUG   machine:simulation    TICK:  220PC:   68ADDR:  121MEM_OUT:   98ALU:   99ACC:   99ST 121
+  DEBUG   machine:simulation    TICK:  222PC:   69ADDR:  121MEM_OUT:   98ALU:   99ACC:   99LD 120
+  DEBUG   machine:simulation    TICK:  224PC:   70ADDR:  120MEM_OUT:    6ALU:    6ACC:    6CMP #24
+  DEBUG   machine:simulation    TICK:  225PC:   71ADDR:  120MEM_OUT:    6ALU:  -18ACC:    6BEQ 73
+  DEBUG   machine:simulation    TICK:  226PC:   72ADDR:  120MEM_OUT:    6ALU:  -18ACC:    6JMP 59
+  DEBUG   machine:simulation    TICK:  227PC:   59ADDR:  120MEM_OUT:    6ALU:  -18ACC:    6LD 2046
+  DEBUG   machine:signal_latch_acc input: "[32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 6
+  DEBUG   machine:simulation    TICK:  229PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK:  230PC:   61ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32BEQ 73
+  DEBUG   machine:simulation    TICK:  231PC:   62ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32ST ~121
+  DEBUG   machine:simulation    TICK:  235PC:   63ADDR:   99MEM_OUT:   99ALU:   32ACC:   32LD 120
+  DEBUG   machine:simulation    TICK:  237PC:   64ADDR:  120MEM_OUT:    6ALU:    6ACC:    6ADD #1
+  DEBUG   machine:simulation    TICK:  238PC:   65ADDR:  120MEM_OUT:    6ALU:    7ACC:    7ST 120
+  DEBUG   machine:simulation    TICK:  240PC:   66ADDR:  120MEM_OUT:    6ALU:    7ACC:    7LD 121
+  DEBUG   machine:simulation    TICK:  242PC:   67ADDR:  121MEM_OUT:   99ALU:   99ACC:   99ADD #1
+  DEBUG   machine:simulation    TICK:  243PC:   68ADDR:  121MEM_OUT:   99ALU:  100ACC:  100ST 121
+  DEBUG   machine:simulation    TICK:  245PC:   69ADDR:  121MEM_OUT:   99ALU:  100ACC:  100LD 120
+  DEBUG   machine:simulation    TICK:  247PC:   70ADDR:  120MEM_OUT:    7ALU:    7ACC:    7CMP #24
+  DEBUG   machine:simulation    TICK:  248PC:   71ADDR:  120MEM_OUT:    7ALU:  -17ACC:    7BEQ 73
+  DEBUG   machine:simulation    TICK:  249PC:   72ADDR:  120MEM_OUT:    7ALU:  -17ACC:    7JMP 59
+  DEBUG   machine:simulation    TICK:  250PC:   59ADDR:  120MEM_OUT:    7ALU:  -17ACC:    7LD 2046
+  DEBUG   machine:signal_latch_acc input: "[97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 7
+  DEBUG   machine:simulation    TICK:  252PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   97CMP #0
+  DEBUG   machine:simulation    TICK:  253PC:   61ADDR: 2046MEM_OUT:    0ALU:   97ACC:   97BEQ 73
+  DEBUG   machine:simulation    TICK:  254PC:   62ADDR: 2046MEM_OUT:    0ALU:   97ACC:   97ST ~121
+  DEBUG   machine:simulation    TICK:  258PC:   63ADDR:  100MEM_OUT:  100ALU:   97ACC:   97LD 120
+  DEBUG   machine:simulation    TICK:  260PC:   64ADDR:  120MEM_OUT:    7ALU:    7ACC:    7ADD #1
+  DEBUG   machine:simulation    TICK:  261PC:   65ADDR:  120MEM_OUT:    7ALU:    8ACC:    8ST 120
+  DEBUG   machine:simulation    TICK:  263PC:   66ADDR:  120MEM_OUT:    7ALU:    8ACC:    8LD 121
+  DEBUG   machine:simulation    TICK:  265PC:   67ADDR:  121MEM_OUT:  100ALU:  100ACC:  100ADD #1
+  DEBUG   machine:simulation    TICK:  266PC:   68ADDR:  121MEM_OUT:  100ALU:  101ACC:  101ST 121
+  DEBUG   machine:simulation    TICK:  268PC:   69ADDR:  121MEM_OUT:  100ALU:  101ACC:  101LD 120
+  DEBUG   machine:simulation    TICK:  270PC:   70ADDR:  120MEM_OUT:    8ALU:    8ACC:    8CMP #24
+  DEBUG   machine:simulation    TICK:  271PC:   71ADDR:  120MEM_OUT:    8ALU:  -16ACC:    8BEQ 73
+  DEBUG   machine:simulation    TICK:  272PC:   72ADDR:  120MEM_OUT:    8ALU:  -16ACC:    8JMP 59
+  DEBUG   machine:simulation    TICK:  273PC:   59ADDR:  120MEM_OUT:    8ALU:  -16ACC:    8LD 2046
+  DEBUG   machine:signal_latch_acc input: "[114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 8
+  DEBUG   machine:simulation    TICK:  275PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK:  276PC:   61ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114BEQ 73
+  DEBUG   machine:simulation    TICK:  277PC:   62ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114ST ~121
+  DEBUG   machine:simulation    TICK:  281PC:   63ADDR:  101MEM_OUT:  101ALU:  114ACC:  114LD 120
+  DEBUG   machine:simulation    TICK:  283PC:   64ADDR:  120MEM_OUT:    8ALU:    8ACC:    8ADD #1
+  DEBUG   machine:simulation    TICK:  284PC:   65ADDR:  120MEM_OUT:    8ALU:    9ACC:    9ST 120
+  DEBUG   machine:simulation    TICK:  286PC:   66ADDR:  120MEM_OUT:    8ALU:    9ACC:    9LD 121
+  DEBUG   machine:simulation    TICK:  288PC:   67ADDR:  121MEM_OUT:  101ALU:  101ACC:  101ADD #1
+  DEBUG   machine:simulation    TICK:  289PC:   68ADDR:  121MEM_OUT:  101ALU:  102ACC:  102ST 121
+  DEBUG   machine:simulation    TICK:  291PC:   69ADDR:  121MEM_OUT:  101ALU:  102ACC:  102LD 120
+  DEBUG   machine:simulation    TICK:  293PC:   70ADDR:  120MEM_OUT:    9ALU:    9ACC:    9CMP #24
+  DEBUG   machine:simulation    TICK:  294PC:   71ADDR:  120MEM_OUT:    9ALU:  -15ACC:    9BEQ 73
+  DEBUG   machine:simulation    TICK:  295PC:   72ADDR:  120MEM_OUT:    9ALU:  -15ACC:    9JMP 59
+  DEBUG   machine:simulation    TICK:  296PC:   59ADDR:  120MEM_OUT:    9ALU:  -15ACC:    9LD 2046
+  DEBUG   machine:signal_latch_acc input: "[99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 9
+  DEBUG   machine:simulation    TICK:  298PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK:  299PC:   61ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99BEQ 73
+  DEBUG   machine:simulation    TICK:  300PC:   62ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99ST ~121
+  DEBUG   machine:simulation    TICK:  304PC:   63ADDR:  102MEM_OUT:  102ALU:   99ACC:   99LD 120
+  DEBUG   machine:simulation    TICK:  306PC:   64ADDR:  120MEM_OUT:    9ALU:    9ACC:    9ADD #1
+  DEBUG   machine:simulation    TICK:  307PC:   65ADDR:  120MEM_OUT:    9ALU:   10ACC:   10ST 120
+  DEBUG   machine:simulation    TICK:  309PC:   66ADDR:  120MEM_OUT:    9ALU:   10ACC:   10LD 121
+  DEBUG   machine:simulation    TICK:  311PC:   67ADDR:  121MEM_OUT:  102ALU:  102ACC:  102ADD #1
+  DEBUG   machine:simulation    TICK:  312PC:   68ADDR:  121MEM_OUT:  102ALU:  103ACC:  103ST 121
+  DEBUG   machine:simulation    TICK:  314PC:   69ADDR:  121MEM_OUT:  102ALU:  103ACC:  103LD 120
+  DEBUG   machine:simulation    TICK:  316PC:   70ADDR:  120MEM_OUT:   10ALU:   10ACC:   10CMP #24
+  DEBUG   machine:simulation    TICK:  317PC:   71ADDR:  120MEM_OUT:   10ALU:  -14ACC:   10BEQ 73
+  DEBUG   machine:simulation    TICK:  318PC:   72ADDR:  120MEM_OUT:   10ALU:  -14ACC:   10JMP 59
+  DEBUG   machine:simulation    TICK:  319PC:   59ADDR:  120MEM_OUT:   10ALU:  -14ACC:   10LD 2046
+  DEBUG   machine:signal_latch_acc input: "[104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 10
+  DEBUG   machine:simulation    TICK:  321PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  104CMP #0
+  DEBUG   machine:simulation    TICK:  322PC:   61ADDR: 2046MEM_OUT:    0ALU:  104ACC:  104BEQ 73
+  DEBUG   machine:simulation    TICK:  323PC:   62ADDR: 2046MEM_OUT:    0ALU:  104ACC:  104ST ~121
+  DEBUG   machine:simulation    TICK:  327PC:   63ADDR:  103MEM_OUT:  103ALU:  104ACC:  104LD 120
+  DEBUG   machine:simulation    TICK:  329PC:   64ADDR:  120MEM_OUT:   10ALU:   10ACC:   10ADD #1
+  DEBUG   machine:simulation    TICK:  330PC:   65ADDR:  120MEM_OUT:   10ALU:   11ACC:   11ST 120
+  DEBUG   machine:simulation    TICK:  332PC:   66ADDR:  120MEM_OUT:   10ALU:   11ACC:   11LD 121
+  DEBUG   machine:simulation    TICK:  334PC:   67ADDR:  121MEM_OUT:  103ALU:  103ACC:  103ADD #1
+  DEBUG   machine:simulation    TICK:  335PC:   68ADDR:  121MEM_OUT:  103ALU:  104ACC:  104ST 121
+  DEBUG   machine:simulation    TICK:  337PC:   69ADDR:  121MEM_OUT:  103ALU:  104ACC:  104LD 120
+  DEBUG   machine:simulation    TICK:  339PC:   70ADDR:  120MEM_OUT:   11ALU:   11ACC:   11CMP #24
+  DEBUG   machine:simulation    TICK:  340PC:   71ADDR:  120MEM_OUT:   11ALU:  -13ACC:   11BEQ 73
+  DEBUG   machine:simulation    TICK:  341PC:   72ADDR:  120MEM_OUT:   11ALU:  -13ACC:   11JMP 59
+  DEBUG   machine:simulation    TICK:  342PC:   59ADDR:  120MEM_OUT:   11ALU:  -13ACC:   11LD 2046
+  DEBUG   machine:signal_latch_acc input: "[105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 11
+  DEBUG   machine:simulation    TICK:  344PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  105CMP #0
+  DEBUG   machine:simulation    TICK:  345PC:   61ADDR: 2046MEM_OUT:    0ALU:  105ACC:  105BEQ 73
+  DEBUG   machine:simulation    TICK:  346PC:   62ADDR: 2046MEM_OUT:    0ALU:  105ACC:  105ST ~121
+  DEBUG   machine:simulation    TICK:  350PC:   63ADDR:  104MEM_OUT:  104ALU:  105ACC:  105LD 120
+  DEBUG   machine:simulation    TICK:  352PC:   64ADDR:  120MEM_OUT:   11ALU:   11ACC:   11ADD #1
+  DEBUG   machine:simulation    TICK:  353PC:   65ADDR:  120MEM_OUT:   11ALU:   12ACC:   12ST 120
+  DEBUG   machine:simulation    TICK:  355PC:   66ADDR:  120MEM_OUT:   11ALU:   12ACC:   12LD 121
+  DEBUG   machine:simulation    TICK:  357PC:   67ADDR:  121MEM_OUT:  104ALU:  104ACC:  104ADD #1
+  DEBUG   machine:simulation    TICK:  358PC:   68ADDR:  121MEM_OUT:  104ALU:  105ACC:  105ST 121
+  DEBUG   machine:simulation    TICK:  360PC:   69ADDR:  121MEM_OUT:  104ALU:  105ACC:  105LD 120
+  DEBUG   machine:simulation    TICK:  362PC:   70ADDR:  120MEM_OUT:   12ALU:   12ACC:   12CMP #24
+  DEBUG   machine:simulation    TICK:  363PC:   71ADDR:  120MEM_OUT:   12ALU:  -12ACC:   12BEQ 73
+  DEBUG   machine:simulation    TICK:  364PC:   72ADDR:  120MEM_OUT:   12ALU:  -12ACC:   12JMP 59
+  DEBUG   machine:simulation    TICK:  365PC:   59ADDR:  120MEM_OUT:   12ALU:  -12ACC:   12LD 2046
+  DEBUG   machine:signal_latch_acc input: "[116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 12
+  DEBUG   machine:simulation    TICK:  367PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK:  368PC:   61ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116BEQ 73
+  DEBUG   machine:simulation    TICK:  369PC:   62ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116ST ~121
+  DEBUG   machine:simulation    TICK:  373PC:   63ADDR:  105MEM_OUT:  105ALU:  116ACC:  116LD 120
+  DEBUG   machine:simulation    TICK:  375PC:   64ADDR:  120MEM_OUT:   12ALU:   12ACC:   12ADD #1
+  DEBUG   machine:simulation    TICK:  376PC:   65ADDR:  120MEM_OUT:   12ALU:   13ACC:   13ST 120
+  DEBUG   machine:simulation    TICK:  378PC:   66ADDR:  120MEM_OUT:   12ALU:   13ACC:   13LD 121
+  DEBUG   machine:simulation    TICK:  380PC:   67ADDR:  121MEM_OUT:  105ALU:  105ACC:  105ADD #1
+  DEBUG   machine:simulation    TICK:  381PC:   68ADDR:  121MEM_OUT:  105ALU:  106ACC:  106ST 121
+  DEBUG   machine:simulation    TICK:  383PC:   69ADDR:  121MEM_OUT:  105ALU:  106ACC:  106LD 120
+  DEBUG   machine:simulation    TICK:  385PC:   70ADDR:  120MEM_OUT:   13ALU:   13ACC:   13CMP #24
+  DEBUG   machine:simulation    TICK:  386PC:   71ADDR:  120MEM_OUT:   13ALU:  -11ACC:   13BEQ 73
+  DEBUG   machine:simulation    TICK:  387PC:   72ADDR:  120MEM_OUT:   13ALU:  -11ACC:   13JMP 59
+  DEBUG   machine:simulation    TICK:  388PC:   59ADDR:  120MEM_OUT:   13ALU:  -11ACC:   13LD 2046
+  DEBUG   machine:signal_latch_acc input: "[101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 13
+  DEBUG   machine:simulation    TICK:  390PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK:  391PC:   61ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101BEQ 73
+  DEBUG   machine:simulation    TICK:  392PC:   62ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101ST ~121
+  DEBUG   machine:simulation    TICK:  396PC:   63ADDR:  106MEM_OUT:  106ALU:  101ACC:  101LD 120
+  DEBUG   machine:simulation    TICK:  398PC:   64ADDR:  120MEM_OUT:   13ALU:   13ACC:   13ADD #1
+  DEBUG   machine:simulation    TICK:  399PC:   65ADDR:  120MEM_OUT:   13ALU:   14ACC:   14ST 120
+  DEBUG   machine:simulation    TICK:  401PC:   66ADDR:  120MEM_OUT:   13ALU:   14ACC:   14LD 121
+  DEBUG   machine:simulation    TICK:  403PC:   67ADDR:  121MEM_OUT:  106ALU:  106ACC:  106ADD #1
+  DEBUG   machine:simulation    TICK:  404PC:   68ADDR:  121MEM_OUT:  106ALU:  107ACC:  107ST 121
+  DEBUG   machine:simulation    TICK:  406PC:   69ADDR:  121MEM_OUT:  106ALU:  107ACC:  107LD 120
+  DEBUG   machine:simulation    TICK:  408PC:   70ADDR:  120MEM_OUT:   14ALU:   14ACC:   14CMP #24
+  DEBUG   machine:simulation    TICK:  409PC:   71ADDR:  120MEM_OUT:   14ALU:  -10ACC:   14BEQ 73
+  DEBUG   machine:simulation    TICK:  410PC:   72ADDR:  120MEM_OUT:   14ALU:  -10ACC:   14JMP 59
+  DEBUG   machine:simulation    TICK:  411PC:   59ADDR:  120MEM_OUT:   14ALU:  -10ACC:   14LD 2046
+  DEBUG   machine:signal_latch_acc input: "[99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 14
+  DEBUG   machine:simulation    TICK:  413PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK:  414PC:   61ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99BEQ 73
+  DEBUG   machine:simulation    TICK:  415PC:   62ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99ST ~121
+  DEBUG   machine:simulation    TICK:  419PC:   63ADDR:  107MEM_OUT:  107ALU:   99ACC:   99LD 120
+  DEBUG   machine:simulation    TICK:  421PC:   64ADDR:  120MEM_OUT:   14ALU:   14ACC:   14ADD #1
+  DEBUG   machine:simulation    TICK:  422PC:   65ADDR:  120MEM_OUT:   14ALU:   15ACC:   15ST 120
+  DEBUG   machine:simulation    TICK:  424PC:   66ADDR:  120MEM_OUT:   14ALU:   15ACC:   15LD 121
+  DEBUG   machine:simulation    TICK:  426PC:   67ADDR:  121MEM_OUT:  107ALU:  107ACC:  107ADD #1
+  DEBUG   machine:simulation    TICK:  427PC:   68ADDR:  121MEM_OUT:  107ALU:  108ACC:  108ST 121
+  DEBUG   machine:simulation    TICK:  429PC:   69ADDR:  121MEM_OUT:  107ALU:  108ACC:  108LD 120
+  DEBUG   machine:simulation    TICK:  431PC:   70ADDR:  120MEM_OUT:   15ALU:   15ACC:   15CMP #24
+  DEBUG   machine:simulation    TICK:  432PC:   71ADDR:  120MEM_OUT:   15ALU:   -9ACC:   15BEQ 73
+  DEBUG   machine:simulation    TICK:  433PC:   72ADDR:  120MEM_OUT:   15ALU:   -9ACC:   15JMP 59
+  DEBUG   machine:simulation    TICK:  434PC:   59ADDR:  120MEM_OUT:   15ALU:   -9ACC:   15LD 2046
+  DEBUG   machine:signal_latch_acc input: "[116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 15
+  DEBUG   machine:simulation    TICK:  436PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK:  437PC:   61ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116BEQ 73
+  DEBUG   machine:simulation    TICK:  438PC:   62ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116ST ~121
+  DEBUG   machine:simulation    TICK:  442PC:   63ADDR:  108MEM_OUT:  108ALU:  116ACC:  116LD 120
+  DEBUG   machine:simulation    TICK:  444PC:   64ADDR:  120MEM_OUT:   15ALU:   15ACC:   15ADD #1
+  DEBUG   machine:simulation    TICK:  445PC:   65ADDR:  120MEM_OUT:   15ALU:   16ACC:   16ST 120
+  DEBUG   machine:simulation    TICK:  447PC:   66ADDR:  120MEM_OUT:   15ALU:   16ACC:   16LD 121
+  DEBUG   machine:simulation    TICK:  449PC:   67ADDR:  121MEM_OUT:  108ALU:  108ACC:  108ADD #1
+  DEBUG   machine:simulation    TICK:  450PC:   68ADDR:  121MEM_OUT:  108ALU:  109ACC:  109ST 121
+  DEBUG   machine:simulation    TICK:  452PC:   69ADDR:  121MEM_OUT:  108ALU:  109ACC:  109LD 120
+  DEBUG   machine:simulation    TICK:  454PC:   70ADDR:  120MEM_OUT:   16ALU:   16ACC:   16CMP #24
+  DEBUG   machine:simulation    TICK:  455PC:   71ADDR:  120MEM_OUT:   16ALU:   -8ACC:   16BEQ 73
+  DEBUG   machine:simulation    TICK:  456PC:   72ADDR:  120MEM_OUT:   16ALU:   -8ACC:   16JMP 59
+  DEBUG   machine:simulation    TICK:  457PC:   59ADDR:  120MEM_OUT:   16ALU:   -8ACC:   16LD 2046
+  DEBUG   machine:signal_latch_acc input: "[117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 16
+  DEBUG   machine:simulation    TICK:  459PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  117CMP #0
+  DEBUG   machine:simulation    TICK:  460PC:   61ADDR: 2046MEM_OUT:    0ALU:  117ACC:  117BEQ 73
+  DEBUG   machine:simulation    TICK:  461PC:   62ADDR: 2046MEM_OUT:    0ALU:  117ACC:  117ST ~121
+  DEBUG   machine:simulation    TICK:  465PC:   63ADDR:  109MEM_OUT:  109ALU:  117ACC:  117LD 120
+  DEBUG   machine:simulation    TICK:  467PC:   64ADDR:  120MEM_OUT:   16ALU:   16ACC:   16ADD #1
+  DEBUG   machine:simulation    TICK:  468PC:   65ADDR:  120MEM_OUT:   16ALU:   17ACC:   17ST 120
+  DEBUG   machine:simulation    TICK:  470PC:   66ADDR:  120MEM_OUT:   16ALU:   17ACC:   17LD 121
+  DEBUG   machine:simulation    TICK:  472PC:   67ADDR:  121MEM_OUT:  109ALU:  109ACC:  109ADD #1
+  DEBUG   machine:simulation    TICK:  473PC:   68ADDR:  121MEM_OUT:  109ALU:  110ACC:  110ST 121
+  DEBUG   machine:simulation    TICK:  475PC:   69ADDR:  121MEM_OUT:  109ALU:  110ACC:  110LD 120
+  DEBUG   machine:simulation    TICK:  477PC:   70ADDR:  120MEM_OUT:   17ALU:   17ACC:   17CMP #24
+  DEBUG   machine:simulation    TICK:  478PC:   71ADDR:  120MEM_OUT:   17ALU:   -7ACC:   17BEQ 73
+  DEBUG   machine:simulation    TICK:  479PC:   72ADDR:  120MEM_OUT:   17ALU:   -7ACC:   17JMP 59
+  DEBUG   machine:simulation    TICK:  480PC:   59ADDR:  120MEM_OUT:   17ALU:   -7ACC:   17LD 2046
+  DEBUG   machine:signal_latch_acc input: "[114, 101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 17
+  DEBUG   machine:simulation    TICK:  482PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK:  483PC:   61ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114BEQ 73
+  DEBUG   machine:simulation    TICK:  484PC:   62ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114ST ~121
+  DEBUG   machine:simulation    TICK:  488PC:   63ADDR:  110MEM_OUT:  110ALU:  114ACC:  114LD 120
+  DEBUG   machine:simulation    TICK:  490PC:   64ADDR:  120MEM_OUT:   17ALU:   17ACC:   17ADD #1
+  DEBUG   machine:simulation    TICK:  491PC:   65ADDR:  120MEM_OUT:   17ALU:   18ACC:   18ST 120
+  DEBUG   machine:simulation    TICK:  493PC:   66ADDR:  120MEM_OUT:   17ALU:   18ACC:   18LD 121
+  DEBUG   machine:simulation    TICK:  495PC:   67ADDR:  121MEM_OUT:  110ALU:  110ACC:  110ADD #1
+  DEBUG   machine:simulation    TICK:  496PC:   68ADDR:  121MEM_OUT:  110ALU:  111ACC:  111ST 121
+  DEBUG   machine:simulation    TICK:  498PC:   69ADDR:  121MEM_OUT:  110ALU:  111ACC:  111LD 120
+  DEBUG   machine:simulation    TICK:  500PC:   70ADDR:  120MEM_OUT:   18ALU:   18ACC:   18CMP #24
+  DEBUG   machine:simulation    TICK:  501PC:   71ADDR:  120MEM_OUT:   18ALU:   -6ACC:   18BEQ 73
+  DEBUG   machine:simulation    TICK:  502PC:   72ADDR:  120MEM_OUT:   18ALU:   -6ACC:   18JMP 59
+  DEBUG   machine:simulation    TICK:  503PC:   59ADDR:  120MEM_OUT:   18ALU:   -6ACC:   18LD 2046
+  DEBUG   machine:signal_latch_acc input: "[101, 32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 18
+  DEBUG   machine:simulation    TICK:  505PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK:  506PC:   61ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101BEQ 73
+  DEBUG   machine:simulation    TICK:  507PC:   62ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101ST ~121
+  DEBUG   machine:simulation    TICK:  511PC:   63ADDR:  111MEM_OUT:  111ALU:  101ACC:  101LD 120
+  DEBUG   machine:simulation    TICK:  513PC:   64ADDR:  120MEM_OUT:   18ALU:   18ACC:   18ADD #1
+  DEBUG   machine:simulation    TICK:  514PC:   65ADDR:  120MEM_OUT:   18ALU:   19ACC:   19ST 120
+  DEBUG   machine:simulation    TICK:  516PC:   66ADDR:  120MEM_OUT:   18ALU:   19ACC:   19LD 121
+  DEBUG   machine:simulation    TICK:  518PC:   67ADDR:  121MEM_OUT:  111ALU:  111ACC:  111ADD #1
+  DEBUG   machine:simulation    TICK:  519PC:   68ADDR:  121MEM_OUT:  111ALU:  112ACC:  112ST 121
+  DEBUG   machine:simulation    TICK:  521PC:   69ADDR:  121MEM_OUT:  111ALU:  112ACC:  112LD 120
+  DEBUG   machine:simulation    TICK:  523PC:   70ADDR:  120MEM_OUT:   19ALU:   19ACC:   19CMP #24
+  DEBUG   machine:simulation    TICK:  524PC:   71ADDR:  120MEM_OUT:   19ALU:   -5ACC:   19BEQ 73
+  DEBUG   machine:simulation    TICK:  525PC:   72ADDR:  120MEM_OUT:   19ALU:   -5ACC:   19JMP 59
+  DEBUG   machine:simulation    TICK:  526PC:   59ADDR:  120MEM_OUT:   19ALU:   -5ACC:   19LD 2046
+  DEBUG   machine:signal_latch_acc input: "[32, 99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 19
+  DEBUG   machine:simulation    TICK:  528PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK:  529PC:   61ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32BEQ 73
+  DEBUG   machine:simulation    TICK:  530PC:   62ADDR: 2046MEM_OUT:    0ALU:   32ACC:   32ST ~121
+  DEBUG   machine:simulation    TICK:  534PC:   63ADDR:  112MEM_OUT:  112ALU:   32ACC:   32LD 120
+  DEBUG   machine:simulation    TICK:  536PC:   64ADDR:  120MEM_OUT:   19ALU:   19ACC:   19ADD #1
+  DEBUG   machine:simulation    TICK:  537PC:   65ADDR:  120MEM_OUT:   19ALU:   20ACC:   20ST 120
+  DEBUG   machine:simulation    TICK:  539PC:   66ADDR:  120MEM_OUT:   19ALU:   20ACC:   20LD 121
+  DEBUG   machine:simulation    TICK:  541PC:   67ADDR:  121MEM_OUT:  112ALU:  112ACC:  112ADD #1
+  DEBUG   machine:simulation    TICK:  542PC:   68ADDR:  121MEM_OUT:  112ALU:  113ACC:  113ST 121
+  DEBUG   machine:simulation    TICK:  544PC:   69ADDR:  121MEM_OUT:  112ALU:  113ACC:  113LD 120
+  DEBUG   machine:simulation    TICK:  546PC:   70ADDR:  120MEM_OUT:   20ALU:   20ACC:   20CMP #24
+  DEBUG   machine:simulation    TICK:  547PC:   71ADDR:  120MEM_OUT:   20ALU:   -4ACC:   20BEQ 73
+  DEBUG   machine:simulation    TICK:  548PC:   72ADDR:  120MEM_OUT:   20ALU:   -4ACC:   20JMP 59
+  DEBUG   machine:simulation    TICK:  549PC:   59ADDR:  120MEM_OUT:   20ALU:   -4ACC:   20LD 2046
+  DEBUG   machine:signal_latch_acc input: "[99, 111, 109, 112, 117, 116, 101, 114, 0]" >> 20
+  DEBUG   machine:simulation    TICK:  551PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK:  552PC:   61ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99BEQ 73
+  DEBUG   machine:simulation    TICK:  553PC:   62ADDR: 2046MEM_OUT:    0ALU:   99ACC:   99ST ~121
+  DEBUG   machine:simulation    TICK:  557PC:   63ADDR:  113MEM_OUT:  113ALU:   99ACC:   99LD 120
+  DEBUG   machine:simulation    TICK:  559PC:   64ADDR:  120MEM_OUT:   20ALU:   20ACC:   20ADD #1
+  DEBUG   machine:simulation    TICK:  560PC:   65ADDR:  120MEM_OUT:   20ALU:   21ACC:   21ST 120
+  DEBUG   machine:simulation    TICK:  562PC:   66ADDR:  120MEM_OUT:   20ALU:   21ACC:   21LD 121
+  DEBUG   machine:simulation    TICK:  564PC:   67ADDR:  121MEM_OUT:  113ALU:  113ACC:  113ADD #1
+  DEBUG   machine:simulation    TICK:  565PC:   68ADDR:  121MEM_OUT:  113ALU:  114ACC:  114ST 121
+  DEBUG   machine:simulation    TICK:  567PC:   69ADDR:  121MEM_OUT:  113ALU:  114ACC:  114LD 120
+  DEBUG   machine:simulation    TICK:  569PC:   70ADDR:  120MEM_OUT:   21ALU:   21ACC:   21CMP #24
+  DEBUG   machine:simulation    TICK:  570PC:   71ADDR:  120MEM_OUT:   21ALU:   -3ACC:   21BEQ 73
+  DEBUG   machine:simulation    TICK:  571PC:   72ADDR:  120MEM_OUT:   21ALU:   -3ACC:   21JMP 59
+  DEBUG   machine:simulation    TICK:  572PC:   59ADDR:  120MEM_OUT:   21ALU:   -3ACC:   21LD 2046
+  DEBUG   machine:signal_latch_acc input: "[111, 109, 112, 117, 116, 101, 114, 0]" >> 21
+  DEBUG   machine:simulation    TICK:  574PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  111CMP #0
+  DEBUG   machine:simulation    TICK:  575PC:   61ADDR: 2046MEM_OUT:    0ALU:  111ACC:  111BEQ 73
+  DEBUG   machine:simulation    TICK:  576PC:   62ADDR: 2046MEM_OUT:    0ALU:  111ACC:  111ST ~121
+  DEBUG   machine:simulation    TICK:  580PC:   63ADDR:  114MEM_OUT:  114ALU:  111ACC:  111LD 120
+  DEBUG   machine:simulation    TICK:  582PC:   64ADDR:  120MEM_OUT:   21ALU:   21ACC:   21ADD #1
+  DEBUG   machine:simulation    TICK:  583PC:   65ADDR:  120MEM_OUT:   21ALU:   22ACC:   22ST 120
+  DEBUG   machine:simulation    TICK:  585PC:   66ADDR:  120MEM_OUT:   21ALU:   22ACC:   22LD 121
+  DEBUG   machine:simulation    TICK:  587PC:   67ADDR:  121MEM_OUT:  114ALU:  114ACC:  114ADD #1
+  DEBUG   machine:simulation    TICK:  588PC:   68ADDR:  121MEM_OUT:  114ALU:  115ACC:  115ST 121
+  DEBUG   machine:simulation    TICK:  590PC:   69ADDR:  121MEM_OUT:  114ALU:  115ACC:  115LD 120
+  DEBUG   machine:simulation    TICK:  592PC:   70ADDR:  120MEM_OUT:   22ALU:   22ACC:   22CMP #24
+  DEBUG   machine:simulation    TICK:  593PC:   71ADDR:  120MEM_OUT:   22ALU:   -2ACC:   22BEQ 73
+  DEBUG   machine:simulation    TICK:  594PC:   72ADDR:  120MEM_OUT:   22ALU:   -2ACC:   22JMP 59
+  DEBUG   machine:simulation    TICK:  595PC:   59ADDR:  120MEM_OUT:   22ALU:   -2ACC:   22LD 2046
+  DEBUG   machine:signal_latch_acc input: "[109, 112, 117, 116, 101, 114, 0]" >> 22
+  DEBUG   machine:simulation    TICK:  597PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  109CMP #0
+  DEBUG   machine:simulation    TICK:  598PC:   61ADDR: 2046MEM_OUT:    0ALU:  109ACC:  109BEQ 73
+  DEBUG   machine:simulation    TICK:  599PC:   62ADDR: 2046MEM_OUT:    0ALU:  109ACC:  109ST ~121
+  DEBUG   machine:simulation    TICK:  603PC:   63ADDR:  115MEM_OUT:  115ALU:  109ACC:  109LD 120
+  DEBUG   machine:simulation    TICK:  605PC:   64ADDR:  120MEM_OUT:   22ALU:   22ACC:   22ADD #1
+  DEBUG   machine:simulation    TICK:  606PC:   65ADDR:  120MEM_OUT:   22ALU:   23ACC:   23ST 120
+  DEBUG   machine:simulation    TICK:  608PC:   66ADDR:  120MEM_OUT:   22ALU:   23ACC:   23LD 121
+  DEBUG   machine:simulation    TICK:  610PC:   67ADDR:  121MEM_OUT:  115ALU:  115ACC:  115ADD #1
+  DEBUG   machine:simulation    TICK:  611PC:   68ADDR:  121MEM_OUT:  115ALU:  116ACC:  116ST 121
+  DEBUG   machine:simulation    TICK:  613PC:   69ADDR:  121MEM_OUT:  115ALU:  116ACC:  116LD 120
+  DEBUG   machine:simulation    TICK:  615PC:   70ADDR:  120MEM_OUT:   23ALU:   23ACC:   23CMP #24
+  DEBUG   machine:simulation    TICK:  616PC:   71ADDR:  120MEM_OUT:   23ALU:   -1ACC:   23BEQ 73
+  DEBUG   machine:simulation    TICK:  617PC:   72ADDR:  120MEM_OUT:   23ALU:   -1ACC:   23JMP 59
+  DEBUG   machine:simulation    TICK:  618PC:   59ADDR:  120MEM_OUT:   23ALU:   -1ACC:   23LD 2046
+  DEBUG   machine:signal_latch_acc input: "[112, 117, 116, 101, 114, 0]" >> 23
+  DEBUG   machine:simulation    TICK:  620PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  112CMP #0
+  DEBUG   machine:simulation    TICK:  621PC:   61ADDR: 2046MEM_OUT:    0ALU:  112ACC:  112BEQ 73
+  DEBUG   machine:simulation    TICK:  622PC:   62ADDR: 2046MEM_OUT:    0ALU:  112ACC:  112ST ~121
+  DEBUG   machine:simulation    TICK:  626PC:   63ADDR:  116MEM_OUT:  116ALU:  112ACC:  112LD 120
+  DEBUG   machine:simulation    TICK:  628PC:   64ADDR:  120MEM_OUT:   23ALU:   23ACC:   23ADD #1
+  DEBUG   machine:simulation    TICK:  629PC:   65ADDR:  120MEM_OUT:   23ALU:   24ACC:   24ST 120
+  DEBUG   machine:simulation    TICK:  631PC:   66ADDR:  120MEM_OUT:   23ALU:   24ACC:   24LD 121
+  DEBUG   machine:simulation    TICK:  633PC:   67ADDR:  121MEM_OUT:  116ALU:  116ACC:  116ADD #1
+  DEBUG   machine:simulation    TICK:  634PC:   68ADDR:  121MEM_OUT:  116ALU:  117ACC:  117ST 121
+  DEBUG   machine:simulation    TICK:  636PC:   69ADDR:  121MEM_OUT:  116ALU:  117ACC:  117LD 120
+  DEBUG   machine:simulation    TICK:  638PC:   70ADDR:  120MEM_OUT:   24ALU:   24ACC:   24CMP #24
+  DEBUG   machine:simulation    TICK:  639PC:   71ADDR:  120MEM_OUT:   24ALU:    0ACC:   24BEQ 73
+  DEBUG   machine:simulation    TICK:  640PC:   73ADDR:  120MEM_OUT:   24ALU:    0ACC:   24LD #0
+  DEBUG   machine:simulation    TICK:  641PC:   74ADDR:  120MEM_OUT:   24ALU:    0ACC:    0ST 122
+  DEBUG   machine:simulation    TICK:  643PC:   75ADDR:  122MEM_OUT:   24ALU:    0ACC:    0LD #93
+  DEBUG   machine:simulation    TICK:  644PC:   76ADDR:  122MEM_OUT:   24ALU:   93ACC:   93ST 123
+  DEBUG   machine:simulation    TICK:  646PC:   77ADDR:  123MEM_OUT:   24ALU:   93ACC:   93LD ~123
+  DEBUG   machine:simulation    TICK:  649PC:   78ADDR:   93MEM_OUT:   73ALU:   73ACC:   73CMP #0
+  DEBUG   machine:simulation    TICK:  650PC:   79ADDR:   93MEM_OUT:   73ALU:   73ACC:   73BEQ 91
+  DEBUG   machine:simulation    TICK:  651PC:   80ADDR:   93MEM_OUT:   73ALU:   73ACC:   73ST 2047
+  DEBUG   machine:signal_write  output: "[]" << 73
+  DEBUG   machine:simulation    TICK:  653PC:   81ADDR: 2047MEM_OUT:   73ALU:   73ACC:   73LD 122
+  DEBUG   machine:simulation    TICK:  655PC:   82ADDR:  122MEM_OUT:    0ALU:    0ACC:    0ADD #1
+  DEBUG   machine:simulation    TICK:  656PC:   83ADDR:  122MEM_OUT:    0ALU:    1ACC:    1ST 122
+  DEBUG   machine:simulation    TICK:  658PC:   84ADDR:  122MEM_OUT:    0ALU:    1ACC:    1LD 123
+  DEBUG   machine:simulation    TICK:  660PC:   85ADDR:  123MEM_OUT:   93ALU:   93ACC:   93ADD #1
+  DEBUG   machine:simulation    TICK:  661PC:   86ADDR:  123MEM_OUT:   93ALU:   94ACC:   94ST 123
+  DEBUG   machine:simulation    TICK:  663PC:   87ADDR:  123MEM_OUT:   93ALU:   94ACC:   94LD 122
+  DEBUG   machine:simulation    TICK:  665PC:   88ADDR:  122MEM_OUT:    1ALU:    1ACC:    1CMP #24
+  DEBUG   machine:simulation    TICK:  666PC:   89ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1BEQ 91
+  DEBUG   machine:simulation    TICK:  667PC:   90ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1JMP 77
+  DEBUG   machine:simulation    TICK:  668PC:   77ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1LD ~123
+  DEBUG   machine:simulation    TICK:  671PC:   78ADDR:   94MEM_OUT:   32ALU:   32ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK:  672PC:   79ADDR:   94MEM_OUT:   32ALU:   32ACC:   32BEQ 91
+  DEBUG   machine:simulation    TICK:  673PC:   80ADDR:   94MEM_OUT:   32ALU:   32ACC:   32ST 2047
+  DEBUG   machine:signal_write  output: "[73]" << 32
+  DEBUG   machine:simulation    TICK:  675PC:   81ADDR: 2047MEM_OUT:   32ALU:   32ACC:   32LD 122
+  DEBUG   machine:simulation    TICK:  677PC:   82ADDR:  122MEM_OUT:    1ALU:    1ACC:    1ADD #1
+  DEBUG   machine:simulation    TICK:  678PC:   83ADDR:  122MEM_OUT:    1ALU:    2ACC:    2ST 122
+  DEBUG   machine:simulation    TICK:  680PC:   84ADDR:  122MEM_OUT:    1ALU:    2ACC:    2LD 123
+  DEBUG   machine:simulation    TICK:  682PC:   85ADDR:  123MEM_OUT:   94ALU:   94ACC:   94ADD #1
+  DEBUG   machine:simulation    TICK:  683PC:   86ADDR:  123MEM_OUT:   94ALU:   95ACC:   95ST 123
+  DEBUG   machine:simulation    TICK:  685PC:   87ADDR:  123MEM_OUT:   94ALU:   95ACC:   95LD 122
+  DEBUG   machine:simulation    TICK:  687PC:   88ADDR:  122MEM_OUT:    2ALU:    2ACC:    2CMP #24
+  DEBUG   machine:simulation    TICK:  688PC:   89ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2BEQ 91
+  DEBUG   machine:simulation    TICK:  689PC:   90ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2JMP 77
+  DEBUG   machine:simulation    TICK:  690PC:   77ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2LD ~123
+  DEBUG   machine:simulation    TICK:  693PC:   78ADDR:   95MEM_OUT:  108ALU:  108ACC:  108CMP #0
+  DEBUG   machine:simulation    TICK:  694PC:   79ADDR:   95MEM_OUT:  108ALU:  108ACC:  108BEQ 91
+  DEBUG   machine:simulation    TICK:  695PC:   80ADDR:   95MEM_OUT:  108ALU:  108ACC:  108ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32]" << 108
+  DEBUG   machine:simulation    TICK:  697PC:   81ADDR: 2047MEM_OUT:  108ALU:  108ACC:  108LD 122
+  DEBUG   machine:simulation    TICK:  699PC:   82ADDR:  122MEM_OUT:    2ALU:    2ACC:    2ADD #1
+  DEBUG   machine:simulation    TICK:  700PC:   83ADDR:  122MEM_OUT:    2ALU:    3ACC:    3ST 122
+  DEBUG   machine:simulation    TICK:  702PC:   84ADDR:  122MEM_OUT:    2ALU:    3ACC:    3LD 123
+  DEBUG   machine:simulation    TICK:  704PC:   85ADDR:  123MEM_OUT:   95ALU:   95ACC:   95ADD #1
+  DEBUG   machine:simulation    TICK:  705PC:   86ADDR:  123MEM_OUT:   95ALU:   96ACC:   96ST 123
+  DEBUG   machine:simulation    TICK:  707PC:   87ADDR:  123MEM_OUT:   95ALU:   96ACC:   96LD 122
+  DEBUG   machine:simulation    TICK:  709PC:   88ADDR:  122MEM_OUT:    3ALU:    3ACC:    3CMP #24
+  DEBUG   machine:simulation    TICK:  710PC:   89ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3BEQ 91
+  DEBUG   machine:simulation    TICK:  711PC:   90ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3JMP 77
+  DEBUG   machine:simulation    TICK:  712PC:   77ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3LD ~123
+  DEBUG   machine:simulation    TICK:  715PC:   78ADDR:   96MEM_OUT:  105ALU:  105ACC:  105CMP #0
+  DEBUG   machine:simulation    TICK:  716PC:   79ADDR:   96MEM_OUT:  105ALU:  105ACC:  105BEQ 91
+  DEBUG   machine:simulation    TICK:  717PC:   80ADDR:   96MEM_OUT:  105ALU:  105ACC:  105ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108]" << 105
+  DEBUG   machine:simulation    TICK:  719PC:   81ADDR: 2047MEM_OUT:  105ALU:  105ACC:  105LD 122
+  DEBUG   machine:simulation    TICK:  721PC:   82ADDR:  122MEM_OUT:    3ALU:    3ACC:    3ADD #1
+  DEBUG   machine:simulation    TICK:  722PC:   83ADDR:  122MEM_OUT:    3ALU:    4ACC:    4ST 122
+  DEBUG   machine:simulation    TICK:  724PC:   84ADDR:  122MEM_OUT:    3ALU:    4ACC:    4LD 123
+  DEBUG   machine:simulation    TICK:  726PC:   85ADDR:  123MEM_OUT:   96ALU:   96ACC:   96ADD #1
+  DEBUG   machine:simulation    TICK:  727PC:   86ADDR:  123MEM_OUT:   96ALU:   97ACC:   97ST 123
+  DEBUG   machine:simulation    TICK:  729PC:   87ADDR:  123MEM_OUT:   96ALU:   97ACC:   97LD 122
+  DEBUG   machine:simulation    TICK:  731PC:   88ADDR:  122MEM_OUT:    4ALU:    4ACC:    4CMP #24
+  DEBUG   machine:simulation    TICK:  732PC:   89ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4BEQ 91
+  DEBUG   machine:simulation    TICK:  733PC:   90ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4JMP 77
+  DEBUG   machine:simulation    TICK:  734PC:   77ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4LD ~123
+  DEBUG   machine:simulation    TICK:  737PC:   78ADDR:   97MEM_OUT:  107ALU:  107ACC:  107CMP #0
+  DEBUG   machine:simulation    TICK:  738PC:   79ADDR:   97MEM_OUT:  107ALU:  107ACC:  107BEQ 91
+  DEBUG   machine:simulation    TICK:  739PC:   80ADDR:   97MEM_OUT:  107ALU:  107ACC:  107ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105]" << 107
+  DEBUG   machine:simulation    TICK:  741PC:   81ADDR: 2047MEM_OUT:  107ALU:  107ACC:  107LD 122
+  DEBUG   machine:simulation    TICK:  743PC:   82ADDR:  122MEM_OUT:    4ALU:    4ACC:    4ADD #1
+  DEBUG   machine:simulation    TICK:  744PC:   83ADDR:  122MEM_OUT:    4ALU:    5ACC:    5ST 122
+  DEBUG   machine:simulation    TICK:  746PC:   84ADDR:  122MEM_OUT:    4ALU:    5ACC:    5LD 123
+  DEBUG   machine:simulation    TICK:  748PC:   85ADDR:  123MEM_OUT:   97ALU:   97ACC:   97ADD #1
+  DEBUG   machine:simulation    TICK:  749PC:   86ADDR:  123MEM_OUT:   97ALU:   98ACC:   98ST 123
+  DEBUG   machine:simulation    TICK:  751PC:   87ADDR:  123MEM_OUT:   97ALU:   98ACC:   98LD 122
+  DEBUG   machine:simulation    TICK:  753PC:   88ADDR:  122MEM_OUT:    5ALU:    5ACC:    5CMP #24
+  DEBUG   machine:simulation    TICK:  754PC:   89ADDR:  122MEM_OUT:    5ALU:  -19ACC:    5BEQ 91
+  DEBUG   machine:simulation    TICK:  755PC:   90ADDR:  122MEM_OUT:    5ALU:  -19ACC:    5JMP 77
+  DEBUG   machine:simulation    TICK:  756PC:   77ADDR:  122MEM_OUT:    5ALU:  -19ACC:    5LD ~123
+  DEBUG   machine:simulation    TICK:  759PC:   78ADDR:   98MEM_OUT:  101ALU:  101ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK:  760PC:   79ADDR:   98MEM_OUT:  101ALU:  101ACC:  101BEQ 91
+  DEBUG   machine:simulation    TICK:  761PC:   80ADDR:   98MEM_OUT:  101ALU:  101ACC:  101ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107]" << 101
+  DEBUG   machine:simulation    TICK:  763PC:   81ADDR: 2047MEM_OUT:  101ALU:  101ACC:  101LD 122
+  DEBUG   machine:simulation    TICK:  765PC:   82ADDR:  122MEM_OUT:    5ALU:    5ACC:    5ADD #1
+  DEBUG   machine:simulation    TICK:  766PC:   83ADDR:  122MEM_OUT:    5ALU:    6ACC:    6ST 122
+  DEBUG   machine:simulation    TICK:  768PC:   84ADDR:  122MEM_OUT:    5ALU:    6ACC:    6LD 123
+  DEBUG   machine:simulation    TICK:  770PC:   85ADDR:  123MEM_OUT:   98ALU:   98ACC:   98ADD #1
+  DEBUG   machine:simulation    TICK:  771PC:   86ADDR:  123MEM_OUT:   98ALU:   99ACC:   99ST 123
+  DEBUG   machine:simulation    TICK:  773PC:   87ADDR:  123MEM_OUT:   98ALU:   99ACC:   99LD 122
+  DEBUG   machine:simulation    TICK:  775PC:   88ADDR:  122MEM_OUT:    6ALU:    6ACC:    6CMP #24
+  DEBUG   machine:simulation    TICK:  776PC:   89ADDR:  122MEM_OUT:    6ALU:  -18ACC:    6BEQ 91
+  DEBUG   machine:simulation    TICK:  777PC:   90ADDR:  122MEM_OUT:    6ALU:  -18ACC:    6JMP 77
+  DEBUG   machine:simulation    TICK:  778PC:   77ADDR:  122MEM_OUT:    6ALU:  -18ACC:    6LD ~123
+  DEBUG   machine:simulation    TICK:  781PC:   78ADDR:   99MEM_OUT:   32ALU:   32ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK:  782PC:   79ADDR:   99MEM_OUT:   32ALU:   32ACC:   32BEQ 91
+  DEBUG   machine:simulation    TICK:  783PC:   80ADDR:   99MEM_OUT:   32ALU:   32ACC:   32ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101]" << 32
+  DEBUG   machine:simulation    TICK:  785PC:   81ADDR: 2047MEM_OUT:   32ALU:   32ACC:   32LD 122
+  DEBUG   machine:simulation    TICK:  787PC:   82ADDR:  122MEM_OUT:    6ALU:    6ACC:    6ADD #1
+  DEBUG   machine:simulation    TICK:  788PC:   83ADDR:  122MEM_OUT:    6ALU:    7ACC:    7ST 122
+  DEBUG   machine:simulation    TICK:  790PC:   84ADDR:  122MEM_OUT:    6ALU:    7ACC:    7LD 123
+  DEBUG   machine:simulation    TICK:  792PC:   85ADDR:  123MEM_OUT:   99ALU:   99ACC:   99ADD #1
+  DEBUG   machine:simulation    TICK:  793PC:   86ADDR:  123MEM_OUT:   99ALU:  100ACC:  100ST 123
+  DEBUG   machine:simulation    TICK:  795PC:   87ADDR:  123MEM_OUT:   99ALU:  100ACC:  100LD 122
+  DEBUG   machine:simulation    TICK:  797PC:   88ADDR:  122MEM_OUT:    7ALU:    7ACC:    7CMP #24
+  DEBUG   machine:simulation    TICK:  798PC:   89ADDR:  122MEM_OUT:    7ALU:  -17ACC:    7BEQ 91
+  DEBUG   machine:simulation    TICK:  799PC:   90ADDR:  122MEM_OUT:    7ALU:  -17ACC:    7JMP 77
+  DEBUG   machine:simulation    TICK:  800PC:   77ADDR:  122MEM_OUT:    7ALU:  -17ACC:    7LD ~123
+  DEBUG   machine:simulation    TICK:  803PC:   78ADDR:  100MEM_OUT:   97ALU:   97ACC:   97CMP #0
+  DEBUG   machine:simulation    TICK:  804PC:   79ADDR:  100MEM_OUT:   97ALU:   97ACC:   97BEQ 91
+  DEBUG   machine:simulation    TICK:  805PC:   80ADDR:  100MEM_OUT:   97ALU:   97ACC:   97ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32]" << 97
+  DEBUG   machine:simulation    TICK:  807PC:   81ADDR: 2047MEM_OUT:   97ALU:   97ACC:   97LD 122
+  DEBUG   machine:simulation    TICK:  809PC:   82ADDR:  122MEM_OUT:    7ALU:    7ACC:    7ADD #1
+  DEBUG   machine:simulation    TICK:  810PC:   83ADDR:  122MEM_OUT:    7ALU:    8ACC:    8ST 122
+  DEBUG   machine:simulation    TICK:  812PC:   84ADDR:  122MEM_OUT:    7ALU:    8ACC:    8LD 123
+  DEBUG   machine:simulation    TICK:  814PC:   85ADDR:  123MEM_OUT:  100ALU:  100ACC:  100ADD #1
+  DEBUG   machine:simulation    TICK:  815PC:   86ADDR:  123MEM_OUT:  100ALU:  101ACC:  101ST 123
+  DEBUG   machine:simulation    TICK:  817PC:   87ADDR:  123MEM_OUT:  100ALU:  101ACC:  101LD 122
+  DEBUG   machine:simulation    TICK:  819PC:   88ADDR:  122MEM_OUT:    8ALU:    8ACC:    8CMP #24
+  DEBUG   machine:simulation    TICK:  820PC:   89ADDR:  122MEM_OUT:    8ALU:  -16ACC:    8BEQ 91
+  DEBUG   machine:simulation    TICK:  821PC:   90ADDR:  122MEM_OUT:    8ALU:  -16ACC:    8JMP 77
+  DEBUG   machine:simulation    TICK:  822PC:   77ADDR:  122MEM_OUT:    8ALU:  -16ACC:    8LD ~123
+  DEBUG   machine:simulation    TICK:  825PC:   78ADDR:  101MEM_OUT:  114ALU:  114ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK:  826PC:   79ADDR:  101MEM_OUT:  114ALU:  114ACC:  114BEQ 91
+  DEBUG   machine:simulation    TICK:  827PC:   80ADDR:  101MEM_OUT:  114ALU:  114ACC:  114ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97]" << 114
+  DEBUG   machine:simulation    TICK:  829PC:   81ADDR: 2047MEM_OUT:  114ALU:  114ACC:  114LD 122
+  DEBUG   machine:simulation    TICK:  831PC:   82ADDR:  122MEM_OUT:    8ALU:    8ACC:    8ADD #1
+  DEBUG   machine:simulation    TICK:  832PC:   83ADDR:  122MEM_OUT:    8ALU:    9ACC:    9ST 122
+  DEBUG   machine:simulation    TICK:  834PC:   84ADDR:  122MEM_OUT:    8ALU:    9ACC:    9LD 123
+  DEBUG   machine:simulation    TICK:  836PC:   85ADDR:  123MEM_OUT:  101ALU:  101ACC:  101ADD #1
+  DEBUG   machine:simulation    TICK:  837PC:   86ADDR:  123MEM_OUT:  101ALU:  102ACC:  102ST 123
+  DEBUG   machine:simulation    TICK:  839PC:   87ADDR:  123MEM_OUT:  101ALU:  102ACC:  102LD 122
+  DEBUG   machine:simulation    TICK:  841PC:   88ADDR:  122MEM_OUT:    9ALU:    9ACC:    9CMP #24
+  DEBUG   machine:simulation    TICK:  842PC:   89ADDR:  122MEM_OUT:    9ALU:  -15ACC:    9BEQ 91
+  DEBUG   machine:simulation    TICK:  843PC:   90ADDR:  122MEM_OUT:    9ALU:  -15ACC:    9JMP 77
+  DEBUG   machine:simulation    TICK:  844PC:   77ADDR:  122MEM_OUT:    9ALU:  -15ACC:    9LD ~123
+  DEBUG   machine:simulation    TICK:  847PC:   78ADDR:  102MEM_OUT:   99ALU:   99ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK:  848PC:   79ADDR:  102MEM_OUT:   99ALU:   99ACC:   99BEQ 91
+  DEBUG   machine:simulation    TICK:  849PC:   80ADDR:  102MEM_OUT:   99ALU:   99ACC:   99ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114]" << 99
+  DEBUG   machine:simulation    TICK:  851PC:   81ADDR: 2047MEM_OUT:   99ALU:   99ACC:   99LD 122
+  DEBUG   machine:simulation    TICK:  853PC:   82ADDR:  122MEM_OUT:    9ALU:    9ACC:    9ADD #1
+  DEBUG   machine:simulation    TICK:  854PC:   83ADDR:  122MEM_OUT:    9ALU:   10ACC:   10ST 122
+  DEBUG   machine:simulation    TICK:  856PC:   84ADDR:  122MEM_OUT:    9ALU:   10ACC:   10LD 123
+  DEBUG   machine:simulation    TICK:  858PC:   85ADDR:  123MEM_OUT:  102ALU:  102ACC:  102ADD #1
+  DEBUG   machine:simulation    TICK:  859PC:   86ADDR:  123MEM_OUT:  102ALU:  103ACC:  103ST 123
+  DEBUG   machine:simulation    TICK:  861PC:   87ADDR:  123MEM_OUT:  102ALU:  103ACC:  103LD 122
+  DEBUG   machine:simulation    TICK:  863PC:   88ADDR:  122MEM_OUT:   10ALU:   10ACC:   10CMP #24
+  DEBUG   machine:simulation    TICK:  864PC:   89ADDR:  122MEM_OUT:   10ALU:  -14ACC:   10BEQ 91
+  DEBUG   machine:simulation    TICK:  865PC:   90ADDR:  122MEM_OUT:   10ALU:  -14ACC:   10JMP 77
+  DEBUG   machine:simulation    TICK:  866PC:   77ADDR:  122MEM_OUT:   10ALU:  -14ACC:   10LD ~123
+  DEBUG   machine:simulation    TICK:  869PC:   78ADDR:  103MEM_OUT:  104ALU:  104ACC:  104CMP #0
+  DEBUG   machine:simulation    TICK:  870PC:   79ADDR:  103MEM_OUT:  104ALU:  104ACC:  104BEQ 91
+  DEBUG   machine:simulation    TICK:  871PC:   80ADDR:  103MEM_OUT:  104ALU:  104ACC:  104ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99]" << 104
+  DEBUG   machine:simulation    TICK:  873PC:   81ADDR: 2047MEM_OUT:  104ALU:  104ACC:  104LD 122
+  DEBUG   machine:simulation    TICK:  875PC:   82ADDR:  122MEM_OUT:   10ALU:   10ACC:   10ADD #1
+  DEBUG   machine:simulation    TICK:  876PC:   83ADDR:  122MEM_OUT:   10ALU:   11ACC:   11ST 122
+  DEBUG   machine:simulation    TICK:  878PC:   84ADDR:  122MEM_OUT:   10ALU:   11ACC:   11LD 123
+  DEBUG   machine:simulation    TICK:  880PC:   85ADDR:  123MEM_OUT:  103ALU:  103ACC:  103ADD #1
+  DEBUG   machine:simulation    TICK:  881PC:   86ADDR:  123MEM_OUT:  103ALU:  104ACC:  104ST 123
+  DEBUG   machine:simulation    TICK:  883PC:   87ADDR:  123MEM_OUT:  103ALU:  104ACC:  104LD 122
+  DEBUG   machine:simulation    TICK:  885PC:   88ADDR:  122MEM_OUT:   11ALU:   11ACC:   11CMP #24
+  DEBUG   machine:simulation    TICK:  886PC:   89ADDR:  122MEM_OUT:   11ALU:  -13ACC:   11BEQ 91
+  DEBUG   machine:simulation    TICK:  887PC:   90ADDR:  122MEM_OUT:   11ALU:  -13ACC:   11JMP 77
+  DEBUG   machine:simulation    TICK:  888PC:   77ADDR:  122MEM_OUT:   11ALU:  -13ACC:   11LD ~123
+  DEBUG   machine:simulation    TICK:  891PC:   78ADDR:  104MEM_OUT:  105ALU:  105ACC:  105CMP #0
+  DEBUG   machine:simulation    TICK:  892PC:   79ADDR:  104MEM_OUT:  105ALU:  105ACC:  105BEQ 91
+  DEBUG   machine:simulation    TICK:  893PC:   80ADDR:  104MEM_OUT:  105ALU:  105ACC:  105ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104]" << 105
+  DEBUG   machine:simulation    TICK:  895PC:   81ADDR: 2047MEM_OUT:  105ALU:  105ACC:  105LD 122
+  DEBUG   machine:simulation    TICK:  897PC:   82ADDR:  122MEM_OUT:   11ALU:   11ACC:   11ADD #1
+  DEBUG   machine:simulation    TICK:  898PC:   83ADDR:  122MEM_OUT:   11ALU:   12ACC:   12ST 122
+  DEBUG   machine:simulation    TICK:  900PC:   84ADDR:  122MEM_OUT:   11ALU:   12ACC:   12LD 123
+  DEBUG   machine:simulation    TICK:  902PC:   85ADDR:  123MEM_OUT:  104ALU:  104ACC:  104ADD #1
+  DEBUG   machine:simulation    TICK:  903PC:   86ADDR:  123MEM_OUT:  104ALU:  105ACC:  105ST 123
+  DEBUG   machine:simulation    TICK:  905PC:   87ADDR:  123MEM_OUT:  104ALU:  105ACC:  105LD 122
+  DEBUG   machine:simulation    TICK:  907PC:   88ADDR:  122MEM_OUT:   12ALU:   12ACC:   12CMP #24
+  DEBUG   machine:simulation    TICK:  908PC:   89ADDR:  122MEM_OUT:   12ALU:  -12ACC:   12BEQ 91
+  DEBUG   machine:simulation    TICK:  909PC:   90ADDR:  122MEM_OUT:   12ALU:  -12ACC:   12JMP 77
+  DEBUG   machine:simulation    TICK:  910PC:   77ADDR:  122MEM_OUT:   12ALU:  -12ACC:   12LD ~123
+  DEBUG   machine:simulation    TICK:  913PC:   78ADDR:  105MEM_OUT:  116ALU:  116ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK:  914PC:   79ADDR:  105MEM_OUT:  116ALU:  116ACC:  116BEQ 91
+  DEBUG   machine:simulation    TICK:  915PC:   80ADDR:  105MEM_OUT:  116ALU:  116ACC:  116ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105]" << 116
+  DEBUG   machine:simulation    TICK:  917PC:   81ADDR: 2047MEM_OUT:  116ALU:  116ACC:  116LD 122
+  DEBUG   machine:simulation    TICK:  919PC:   82ADDR:  122MEM_OUT:   12ALU:   12ACC:   12ADD #1
+  DEBUG   machine:simulation    TICK:  920PC:   83ADDR:  122MEM_OUT:   12ALU:   13ACC:   13ST 122
+  DEBUG   machine:simulation    TICK:  922PC:   84ADDR:  122MEM_OUT:   12ALU:   13ACC:   13LD 123
+  DEBUG   machine:simulation    TICK:  924PC:   85ADDR:  123MEM_OUT:  105ALU:  105ACC:  105ADD #1
+  DEBUG   machine:simulation    TICK:  925PC:   86ADDR:  123MEM_OUT:  105ALU:  106ACC:  106ST 123
+  DEBUG   machine:simulation    TICK:  927PC:   87ADDR:  123MEM_OUT:  105ALU:  106ACC:  106LD 122
+  DEBUG   machine:simulation    TICK:  929PC:   88ADDR:  122MEM_OUT:   13ALU:   13ACC:   13CMP #24
+  DEBUG   machine:simulation    TICK:  930PC:   89ADDR:  122MEM_OUT:   13ALU:  -11ACC:   13BEQ 91
+  DEBUG   machine:simulation    TICK:  931PC:   90ADDR:  122MEM_OUT:   13ALU:  -11ACC:   13JMP 77
+  DEBUG   machine:simulation    TICK:  932PC:   77ADDR:  122MEM_OUT:   13ALU:  -11ACC:   13LD ~123
+  DEBUG   machine:simulation    TICK:  935PC:   78ADDR:  106MEM_OUT:  101ALU:  101ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK:  936PC:   79ADDR:  106MEM_OUT:  101ALU:  101ACC:  101BEQ 91
+  DEBUG   machine:simulation    TICK:  937PC:   80ADDR:  106MEM_OUT:  101ALU:  101ACC:  101ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116]" << 101
+  DEBUG   machine:simulation    TICK:  939PC:   81ADDR: 2047MEM_OUT:  101ALU:  101ACC:  101LD 122
+  DEBUG   machine:simulation    TICK:  941PC:   82ADDR:  122MEM_OUT:   13ALU:   13ACC:   13ADD #1
+  DEBUG   machine:simulation    TICK:  942PC:   83ADDR:  122MEM_OUT:   13ALU:   14ACC:   14ST 122
+  DEBUG   machine:simulation    TICK:  944PC:   84ADDR:  122MEM_OUT:   13ALU:   14ACC:   14LD 123
+  DEBUG   machine:simulation    TICK:  946PC:   85ADDR:  123MEM_OUT:  106ALU:  106ACC:  106ADD #1
+  DEBUG   machine:simulation    TICK:  947PC:   86ADDR:  123MEM_OUT:  106ALU:  107ACC:  107ST 123
+  DEBUG   machine:simulation    TICK:  949PC:   87ADDR:  123MEM_OUT:  106ALU:  107ACC:  107LD 122
+  DEBUG   machine:simulation    TICK:  951PC:   88ADDR:  122MEM_OUT:   14ALU:   14ACC:   14CMP #24
+  DEBUG   machine:simulation    TICK:  952PC:   89ADDR:  122MEM_OUT:   14ALU:  -10ACC:   14BEQ 91
+  DEBUG   machine:simulation    TICK:  953PC:   90ADDR:  122MEM_OUT:   14ALU:  -10ACC:   14JMP 77
+  DEBUG   machine:simulation    TICK:  954PC:   77ADDR:  122MEM_OUT:   14ALU:  -10ACC:   14LD ~123
+  DEBUG   machine:simulation    TICK:  957PC:   78ADDR:  107MEM_OUT:   99ALU:   99ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK:  958PC:   79ADDR:  107MEM_OUT:   99ALU:   99ACC:   99BEQ 91
+  DEBUG   machine:simulation    TICK:  959PC:   80ADDR:  107MEM_OUT:   99ALU:   99ACC:   99ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101]" << 99
+  DEBUG   machine:simulation    TICK:  961PC:   81ADDR: 2047MEM_OUT:   99ALU:   99ACC:   99LD 122
+  DEBUG   machine:simulation    TICK:  963PC:   82ADDR:  122MEM_OUT:   14ALU:   14ACC:   14ADD #1
+  DEBUG   machine:simulation    TICK:  964PC:   83ADDR:  122MEM_OUT:   14ALU:   15ACC:   15ST 122
+  DEBUG   machine:simulation    TICK:  966PC:   84ADDR:  122MEM_OUT:   14ALU:   15ACC:   15LD 123
+  DEBUG   machine:simulation    TICK:  968PC:   85ADDR:  123MEM_OUT:  107ALU:  107ACC:  107ADD #1
+  DEBUG   machine:simulation    TICK:  969PC:   86ADDR:  123MEM_OUT:  107ALU:  108ACC:  108ST 123
+  DEBUG   machine:simulation    TICK:  971PC:   87ADDR:  123MEM_OUT:  107ALU:  108ACC:  108LD 122
+  DEBUG   machine:simulation    TICK:  973PC:   88ADDR:  122MEM_OUT:   15ALU:   15ACC:   15CMP #24
+  DEBUG   machine:simulation    TICK:  974PC:   89ADDR:  122MEM_OUT:   15ALU:   -9ACC:   15BEQ 91
+  DEBUG   machine:simulation    TICK:  975PC:   90ADDR:  122MEM_OUT:   15ALU:   -9ACC:   15JMP 77
+  DEBUG   machine:simulation    TICK:  976PC:   77ADDR:  122MEM_OUT:   15ALU:   -9ACC:   15LD ~123
+  DEBUG   machine:simulation    TICK:  979PC:   78ADDR:  108MEM_OUT:  116ALU:  116ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK:  980PC:   79ADDR:  108MEM_OUT:  116ALU:  116ACC:  116BEQ 91
+  DEBUG   machine:simulation    TICK:  981PC:   80ADDR:  108MEM_OUT:  116ALU:  116ACC:  116ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99]" << 116
+  DEBUG   machine:simulation    TICK:  983PC:   81ADDR: 2047MEM_OUT:  116ALU:  116ACC:  116LD 122
+  DEBUG   machine:simulation    TICK:  985PC:   82ADDR:  122MEM_OUT:   15ALU:   15ACC:   15ADD #1
+  DEBUG   machine:simulation    TICK:  986PC:   83ADDR:  122MEM_OUT:   15ALU:   16ACC:   16ST 122
+  DEBUG   machine:simulation    TICK:  988PC:   84ADDR:  122MEM_OUT:   15ALU:   16ACC:   16LD 123
+  DEBUG   machine:simulation    TICK:  990PC:   85ADDR:  123MEM_OUT:  108ALU:  108ACC:  108ADD #1
+  DEBUG   machine:simulation    TICK:  991PC:   86ADDR:  123MEM_OUT:  108ALU:  109ACC:  109ST 123
+  DEBUG   machine:simulation    TICK:  993PC:   87ADDR:  123MEM_OUT:  108ALU:  109ACC:  109LD 122
+  DEBUG   machine:simulation    TICK:  995PC:   88ADDR:  122MEM_OUT:   16ALU:   16ACC:   16CMP #24
+  DEBUG   machine:simulation    TICK:  996PC:   89ADDR:  122MEM_OUT:   16ALU:   -8ACC:   16BEQ 91
+  DEBUG   machine:simulation    TICK:  997PC:   90ADDR:  122MEM_OUT:   16ALU:   -8ACC:   16JMP 77
+  DEBUG   machine:simulation    TICK:  998PC:   77ADDR:  122MEM_OUT:   16ALU:   -8ACC:   16LD ~123
+  DEBUG   machine:simulation    TICK: 1001PC:   78ADDR:  109MEM_OUT:  117ALU:  117ACC:  117CMP #0
+  DEBUG   machine:simulation    TICK: 1002PC:   79ADDR:  109MEM_OUT:  117ALU:  117ACC:  117BEQ 91
+  DEBUG   machine:simulation    TICK: 1003PC:   80ADDR:  109MEM_OUT:  117ALU:  117ACC:  117ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116]" << 117
+  DEBUG   machine:simulation    TICK: 1005PC:   81ADDR: 2047MEM_OUT:  117ALU:  117ACC:  117LD 122
+  DEBUG   machine:simulation    TICK: 1007PC:   82ADDR:  122MEM_OUT:   16ALU:   16ACC:   16ADD #1
+  DEBUG   machine:simulation    TICK: 1008PC:   83ADDR:  122MEM_OUT:   16ALU:   17ACC:   17ST 122
+  DEBUG   machine:simulation    TICK: 1010PC:   84ADDR:  122MEM_OUT:   16ALU:   17ACC:   17LD 123
+  DEBUG   machine:simulation    TICK: 1012PC:   85ADDR:  123MEM_OUT:  109ALU:  109ACC:  109ADD #1
+  DEBUG   machine:simulation    TICK: 1013PC:   86ADDR:  123MEM_OUT:  109ALU:  110ACC:  110ST 123
+  DEBUG   machine:simulation    TICK: 1015PC:   87ADDR:  123MEM_OUT:  109ALU:  110ACC:  110LD 122
+  DEBUG   machine:simulation    TICK: 1017PC:   88ADDR:  122MEM_OUT:   17ALU:   17ACC:   17CMP #24
+  DEBUG   machine:simulation    TICK: 1018PC:   89ADDR:  122MEM_OUT:   17ALU:   -7ACC:   17BEQ 91
+  DEBUG   machine:simulation    TICK: 1019PC:   90ADDR:  122MEM_OUT:   17ALU:   -7ACC:   17JMP 77
+  DEBUG   machine:simulation    TICK: 1020PC:   77ADDR:  122MEM_OUT:   17ALU:   -7ACC:   17LD ~123
+  DEBUG   machine:simulation    TICK: 1023PC:   78ADDR:  110MEM_OUT:  114ALU:  114ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK: 1024PC:   79ADDR:  110MEM_OUT:  114ALU:  114ACC:  114BEQ 91
+  DEBUG   machine:simulation    TICK: 1025PC:   80ADDR:  110MEM_OUT:  114ALU:  114ACC:  114ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117]" << 114
+  DEBUG   machine:simulation    TICK: 1027PC:   81ADDR: 2047MEM_OUT:  114ALU:  114ACC:  114LD 122
+  DEBUG   machine:simulation    TICK: 1029PC:   82ADDR:  122MEM_OUT:   17ALU:   17ACC:   17ADD #1
+  DEBUG   machine:simulation    TICK: 1030PC:   83ADDR:  122MEM_OUT:   17ALU:   18ACC:   18ST 122
+  DEBUG   machine:simulation    TICK: 1032PC:   84ADDR:  122MEM_OUT:   17ALU:   18ACC:   18LD 123
+  DEBUG   machine:simulation    TICK: 1034PC:   85ADDR:  123MEM_OUT:  110ALU:  110ACC:  110ADD #1
+  DEBUG   machine:simulation    TICK: 1035PC:   86ADDR:  123MEM_OUT:  110ALU:  111ACC:  111ST 123
+  DEBUG   machine:simulation    TICK: 1037PC:   87ADDR:  123MEM_OUT:  110ALU:  111ACC:  111LD 122
+  DEBUG   machine:simulation    TICK: 1039PC:   88ADDR:  122MEM_OUT:   18ALU:   18ACC:   18CMP #24
+  DEBUG   machine:simulation    TICK: 1040PC:   89ADDR:  122MEM_OUT:   18ALU:   -6ACC:   18BEQ 91
+  DEBUG   machine:simulation    TICK: 1041PC:   90ADDR:  122MEM_OUT:   18ALU:   -6ACC:   18JMP 77
+  DEBUG   machine:simulation    TICK: 1042PC:   77ADDR:  122MEM_OUT:   18ALU:   -6ACC:   18LD ~123
+  DEBUG   machine:simulation    TICK: 1045PC:   78ADDR:  111MEM_OUT:  101ALU:  101ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK: 1046PC:   79ADDR:  111MEM_OUT:  101ALU:  101ACC:  101BEQ 91
+  DEBUG   machine:simulation    TICK: 1047PC:   80ADDR:  111MEM_OUT:  101ALU:  101ACC:  101ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114]" << 101
+  DEBUG   machine:simulation    TICK: 1049PC:   81ADDR: 2047MEM_OUT:  101ALU:  101ACC:  101LD 122
+  DEBUG   machine:simulation    TICK: 1051PC:   82ADDR:  122MEM_OUT:   18ALU:   18ACC:   18ADD #1
+  DEBUG   machine:simulation    TICK: 1052PC:   83ADDR:  122MEM_OUT:   18ALU:   19ACC:   19ST 122
+  DEBUG   machine:simulation    TICK: 1054PC:   84ADDR:  122MEM_OUT:   18ALU:   19ACC:   19LD 123
+  DEBUG   machine:simulation    TICK: 1056PC:   85ADDR:  123MEM_OUT:  111ALU:  111ACC:  111ADD #1
+  DEBUG   machine:simulation    TICK: 1057PC:   86ADDR:  123MEM_OUT:  111ALU:  112ACC:  112ST 123
+  DEBUG   machine:simulation    TICK: 1059PC:   87ADDR:  123MEM_OUT:  111ALU:  112ACC:  112LD 122
+  DEBUG   machine:simulation    TICK: 1061PC:   88ADDR:  122MEM_OUT:   19ALU:   19ACC:   19CMP #24
+  DEBUG   machine:simulation    TICK: 1062PC:   89ADDR:  122MEM_OUT:   19ALU:   -5ACC:   19BEQ 91
+  DEBUG   machine:simulation    TICK: 1063PC:   90ADDR:  122MEM_OUT:   19ALU:   -5ACC:   19JMP 77
+  DEBUG   machine:simulation    TICK: 1064PC:   77ADDR:  122MEM_OUT:   19ALU:   -5ACC:   19LD ~123
+  DEBUG   machine:simulation    TICK: 1067PC:   78ADDR:  112MEM_OUT:   32ALU:   32ACC:   32CMP #0
+  DEBUG   machine:simulation    TICK: 1068PC:   79ADDR:  112MEM_OUT:   32ALU:   32ACC:   32BEQ 91
+  DEBUG   machine:simulation    TICK: 1069PC:   80ADDR:  112MEM_OUT:   32ALU:   32ACC:   32ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101]" << 32
+  DEBUG   machine:simulation    TICK: 1071PC:   81ADDR: 2047MEM_OUT:   32ALU:   32ACC:   32LD 122
+  DEBUG   machine:simulation    TICK: 1073PC:   82ADDR:  122MEM_OUT:   19ALU:   19ACC:   19ADD #1
+  DEBUG   machine:simulation    TICK: 1074PC:   83ADDR:  122MEM_OUT:   19ALU:   20ACC:   20ST 122
+  DEBUG   machine:simulation    TICK: 1076PC:   84ADDR:  122MEM_OUT:   19ALU:   20ACC:   20LD 123
+  DEBUG   machine:simulation    TICK: 1078PC:   85ADDR:  123MEM_OUT:  112ALU:  112ACC:  112ADD #1
+  DEBUG   machine:simulation    TICK: 1079PC:   86ADDR:  123MEM_OUT:  112ALU:  113ACC:  113ST 123
+  DEBUG   machine:simulation    TICK: 1081PC:   87ADDR:  123MEM_OUT:  112ALU:  113ACC:  113LD 122
+  DEBUG   machine:simulation    TICK: 1083PC:   88ADDR:  122MEM_OUT:   20ALU:   20ACC:   20CMP #24
+  DEBUG   machine:simulation    TICK: 1084PC:   89ADDR:  122MEM_OUT:   20ALU:   -4ACC:   20BEQ 91
+  DEBUG   machine:simulation    TICK: 1085PC:   90ADDR:  122MEM_OUT:   20ALU:   -4ACC:   20JMP 77
+  DEBUG   machine:simulation    TICK: 1086PC:   77ADDR:  122MEM_OUT:   20ALU:   -4ACC:   20LD ~123
+  DEBUG   machine:simulation    TICK: 1089PC:   78ADDR:  113MEM_OUT:   99ALU:   99ACC:   99CMP #0
+  DEBUG   machine:simulation    TICK: 1090PC:   79ADDR:  113MEM_OUT:   99ALU:   99ACC:   99BEQ 91
+  DEBUG   machine:simulation    TICK: 1091PC:   80ADDR:  113MEM_OUT:   99ALU:   99ACC:   99ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32]" << 99
+  DEBUG   machine:simulation    TICK: 1093PC:   81ADDR: 2047MEM_OUT:   99ALU:   99ACC:   99LD 122
+  DEBUG   machine:simulation    TICK: 1095PC:   82ADDR:  122MEM_OUT:   20ALU:   20ACC:   20ADD #1
+  DEBUG   machine:simulation    TICK: 1096PC:   83ADDR:  122MEM_OUT:   20ALU:   21ACC:   21ST 122
+  DEBUG   machine:simulation    TICK: 1098PC:   84ADDR:  122MEM_OUT:   20ALU:   21ACC:   21LD 123
+  DEBUG   machine:simulation    TICK: 1100PC:   85ADDR:  123MEM_OUT:  113ALU:  113ACC:  113ADD #1
+  DEBUG   machine:simulation    TICK: 1101PC:   86ADDR:  123MEM_OUT:  113ALU:  114ACC:  114ST 123
+  DEBUG   machine:simulation    TICK: 1103PC:   87ADDR:  123MEM_OUT:  113ALU:  114ACC:  114LD 122
+  DEBUG   machine:simulation    TICK: 1105PC:   88ADDR:  122MEM_OUT:   21ALU:   21ACC:   21CMP #24
+  DEBUG   machine:simulation    TICK: 1106PC:   89ADDR:  122MEM_OUT:   21ALU:   -3ACC:   21BEQ 91
+  DEBUG   machine:simulation    TICK: 1107PC:   90ADDR:  122MEM_OUT:   21ALU:   -3ACC:   21JMP 77
+  DEBUG   machine:simulation    TICK: 1108PC:   77ADDR:  122MEM_OUT:   21ALU:   -3ACC:   21LD ~123
+  DEBUG   machine:simulation    TICK: 1111PC:   78ADDR:  114MEM_OUT:  111ALU:  111ACC:  111CMP #0
+  DEBUG   machine:simulation    TICK: 1112PC:   79ADDR:  114MEM_OUT:  111ALU:  111ACC:  111BEQ 91
+  DEBUG   machine:simulation    TICK: 1113PC:   80ADDR:  114MEM_OUT:  111ALU:  111ACC:  111ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99]" << 111
+  DEBUG   machine:simulation    TICK: 1115PC:   81ADDR: 2047MEM_OUT:  111ALU:  111ACC:  111LD 122
+  DEBUG   machine:simulation    TICK: 1117PC:   82ADDR:  122MEM_OUT:   21ALU:   21ACC:   21ADD #1
+  DEBUG   machine:simulation    TICK: 1118PC:   83ADDR:  122MEM_OUT:   21ALU:   22ACC:   22ST 122
+  DEBUG   machine:simulation    TICK: 1120PC:   84ADDR:  122MEM_OUT:   21ALU:   22ACC:   22LD 123
+  DEBUG   machine:simulation    TICK: 1122PC:   85ADDR:  123MEM_OUT:  114ALU:  114ACC:  114ADD #1
+  DEBUG   machine:simulation    TICK: 1123PC:   86ADDR:  123MEM_OUT:  114ALU:  115ACC:  115ST 123
+  DEBUG   machine:simulation    TICK: 1125PC:   87ADDR:  123MEM_OUT:  114ALU:  115ACC:  115LD 122
+  DEBUG   machine:simulation    TICK: 1127PC:   88ADDR:  122MEM_OUT:   22ALU:   22ACC:   22CMP #24
+  DEBUG   machine:simulation    TICK: 1128PC:   89ADDR:  122MEM_OUT:   22ALU:   -2ACC:   22BEQ 91
+  DEBUG   machine:simulation    TICK: 1129PC:   90ADDR:  122MEM_OUT:   22ALU:   -2ACC:   22JMP 77
+  DEBUG   machine:simulation    TICK: 1130PC:   77ADDR:  122MEM_OUT:   22ALU:   -2ACC:   22LD ~123
+  DEBUG   machine:simulation    TICK: 1133PC:   78ADDR:  115MEM_OUT:  109ALU:  109ACC:  109CMP #0
+  DEBUG   machine:simulation    TICK: 1134PC:   79ADDR:  115MEM_OUT:  109ALU:  109ACC:  109BEQ 91
+  DEBUG   machine:simulation    TICK: 1135PC:   80ADDR:  115MEM_OUT:  109ALU:  109ACC:  109ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111]" << 109
+  DEBUG   machine:simulation    TICK: 1137PC:   81ADDR: 2047MEM_OUT:  109ALU:  109ACC:  109LD 122
+  DEBUG   machine:simulation    TICK: 1139PC:   82ADDR:  122MEM_OUT:   22ALU:   22ACC:   22ADD #1
+  DEBUG   machine:simulation    TICK: 1140PC:   83ADDR:  122MEM_OUT:   22ALU:   23ACC:   23ST 122
+  DEBUG   machine:simulation    TICK: 1142PC:   84ADDR:  122MEM_OUT:   22ALU:   23ACC:   23LD 123
+  DEBUG   machine:simulation    TICK: 1144PC:   85ADDR:  123MEM_OUT:  115ALU:  115ACC:  115ADD #1
+  DEBUG   machine:simulation    TICK: 1145PC:   86ADDR:  123MEM_OUT:  115ALU:  116ACC:  116ST 123
+  DEBUG   machine:simulation    TICK: 1147PC:   87ADDR:  123MEM_OUT:  115ALU:  116ACC:  116LD 122
+  DEBUG   machine:simulation    TICK: 1149PC:   88ADDR:  122MEM_OUT:   23ALU:   23ACC:   23CMP #24
+  DEBUG   machine:simulation    TICK: 1150PC:   89ADDR:  122MEM_OUT:   23ALU:   -1ACC:   23BEQ 91
+  DEBUG   machine:simulation    TICK: 1151PC:   90ADDR:  122MEM_OUT:   23ALU:   -1ACC:   23JMP 77
+  DEBUG   machine:simulation    TICK: 1152PC:   77ADDR:  122MEM_OUT:   23ALU:   -1ACC:   23LD ~123
+  DEBUG   machine:simulation    TICK: 1155PC:   78ADDR:  116MEM_OUT:  112ALU:  112ACC:  112CMP #0
+  DEBUG   machine:simulation    TICK: 1156PC:   79ADDR:  116MEM_OUT:  112ALU:  112ACC:  112BEQ 91
+  DEBUG   machine:simulation    TICK: 1157PC:   80ADDR:  116MEM_OUT:  112ALU:  112ACC:  112ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109]" << 112
+  DEBUG   machine:simulation    TICK: 1159PC:   81ADDR: 2047MEM_OUT:  112ALU:  112ACC:  112LD 122
+  DEBUG   machine:simulation    TICK: 1161PC:   82ADDR:  122MEM_OUT:   23ALU:   23ACC:   23ADD #1
+  DEBUG   machine:simulation    TICK: 1162PC:   83ADDR:  122MEM_OUT:   23ALU:   24ACC:   24ST 122
+  DEBUG   machine:simulation    TICK: 1164PC:   84ADDR:  122MEM_OUT:   23ALU:   24ACC:   24LD 123
+  DEBUG   machine:simulation    TICK: 1166PC:   85ADDR:  123MEM_OUT:  116ALU:  116ACC:  116ADD #1
+  DEBUG   machine:simulation    TICK: 1167PC:   86ADDR:  123MEM_OUT:  116ALU:  117ACC:  117ST 123
+  DEBUG   machine:simulation    TICK: 1169PC:   87ADDR:  123MEM_OUT:  116ALU:  117ACC:  117LD 122
+  DEBUG   machine:simulation    TICK: 1171PC:   88ADDR:  122MEM_OUT:   24ALU:   24ACC:   24CMP #24
+  DEBUG   machine:simulation    TICK: 1172PC:   89ADDR:  122MEM_OUT:   24ALU:    0ACC:   24BEQ 91
+  DEBUG   machine:simulation    TICK: 1173PC:   91ADDR:  122MEM_OUT:   24ALU:    0ACC:   24JMP 2
+  DEBUG   machine:simulation    TICK: 1174PC:    2ADDR:  122MEM_OUT:   24ALU:    0ACC:   24LD #2
+  DEBUG   machine:simulation    TICK: 1175PC:    3ADDR:  122MEM_OUT:   24ALU:    2ACC:    2ST 119
+  DEBUG   machine:simulation    TICK: 1177PC:    4ADDR:  119MEM_OUT:   24ALU:    2ACC:    2LD 118
+  DEBUG   machine:simulation    TICK: 1179PC:    5ADDR:  118MEM_OUT:    1ALU:    1ACC:    1CMP 119
+  DEBUG   machine:simulation    TICK: 1181PC:    6ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1BG 92
+  DEBUG   machine:simulation    TICK: 1182PC:    7ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1LD #0
+  DEBUG   machine:simulation    TICK: 1183PC:    8ADDR:  119MEM_OUT:    2ALU:    0ACC:    0ST 93
+  DEBUG   machine:simulation    TICK: 1185PC:    9ADDR:   93MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1186PC:   10ADDR:   93MEM_OUT:    2ALU:    0ACC:    0ST 94
+  DEBUG   machine:simulation    TICK: 1188PC:   11ADDR:   94MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1189PC:   12ADDR:   94MEM_OUT:    2ALU:    0ACC:    0ST 95
+  DEBUG   machine:simulation    TICK: 1191PC:   13ADDR:   95MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1192PC:   14ADDR:   95MEM_OUT:    2ALU:    0ACC:    0ST 96
+  DEBUG   machine:simulation    TICK: 1194PC:   15ADDR:   96MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1195PC:   16ADDR:   96MEM_OUT:    2ALU:    0ACC:    0ST 97
+  DEBUG   machine:simulation    TICK: 1197PC:   17ADDR:   97MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1198PC:   18ADDR:   97MEM_OUT:    2ALU:    0ACC:    0ST 98
+  DEBUG   machine:simulation    TICK: 1200PC:   19ADDR:   98MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1201PC:   20ADDR:   98MEM_OUT:    2ALU:    0ACC:    0ST 99
+  DEBUG   machine:simulation    TICK: 1203PC:   21ADDR:   99MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1204PC:   22ADDR:   99MEM_OUT:    2ALU:    0ACC:    0ST 100
+  DEBUG   machine:simulation    TICK: 1206PC:   23ADDR:  100MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1207PC:   24ADDR:  100MEM_OUT:    2ALU:    0ACC:    0ST 101
+  DEBUG   machine:simulation    TICK: 1209PC:   25ADDR:  101MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1210PC:   26ADDR:  101MEM_OUT:    2ALU:    0ACC:    0ST 102
+  DEBUG   machine:simulation    TICK: 1212PC:   27ADDR:  102MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1213PC:   28ADDR:  102MEM_OUT:    2ALU:    0ACC:    0ST 103
+  DEBUG   machine:simulation    TICK: 1215PC:   29ADDR:  103MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1216PC:   30ADDR:  103MEM_OUT:    2ALU:    0ACC:    0ST 104
+  DEBUG   machine:simulation    TICK: 1218PC:   31ADDR:  104MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1219PC:   32ADDR:  104MEM_OUT:    2ALU:    0ACC:    0ST 105
+  DEBUG   machine:simulation    TICK: 1221PC:   33ADDR:  105MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1222PC:   34ADDR:  105MEM_OUT:    2ALU:    0ACC:    0ST 106
+  DEBUG   machine:simulation    TICK: 1224PC:   35ADDR:  106MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1225PC:   36ADDR:  106MEM_OUT:    2ALU:    0ACC:    0ST 107
+  DEBUG   machine:simulation    TICK: 1227PC:   37ADDR:  107MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1228PC:   38ADDR:  107MEM_OUT:    2ALU:    0ACC:    0ST 108
+  DEBUG   machine:simulation    TICK: 1230PC:   39ADDR:  108MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1231PC:   40ADDR:  108MEM_OUT:    2ALU:    0ACC:    0ST 109
+  DEBUG   machine:simulation    TICK: 1233PC:   41ADDR:  109MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1234PC:   42ADDR:  109MEM_OUT:    2ALU:    0ACC:    0ST 110
+  DEBUG   machine:simulation    TICK: 1236PC:   43ADDR:  110MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1237PC:   44ADDR:  110MEM_OUT:    2ALU:    0ACC:    0ST 111
+  DEBUG   machine:simulation    TICK: 1239PC:   45ADDR:  111MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1240PC:   46ADDR:  111MEM_OUT:    2ALU:    0ACC:    0ST 112
+  DEBUG   machine:simulation    TICK: 1242PC:   47ADDR:  112MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1243PC:   48ADDR:  112MEM_OUT:    2ALU:    0ACC:    0ST 113
+  DEBUG   machine:simulation    TICK: 1245PC:   49ADDR:  113MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1246PC:   50ADDR:  113MEM_OUT:    2ALU:    0ACC:    0ST 114
+  DEBUG   machine:simulation    TICK: 1248PC:   51ADDR:  114MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1249PC:   52ADDR:  114MEM_OUT:    2ALU:    0ACC:    0ST 115
+  DEBUG   machine:simulation    TICK: 1251PC:   53ADDR:  115MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1252PC:   54ADDR:  115MEM_OUT:    2ALU:    0ACC:    0ST 116
+  DEBUG   machine:simulation    TICK: 1254PC:   55ADDR:  116MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1255PC:   56ADDR:  116MEM_OUT:    2ALU:    0ACC:    0ST 120
+  DEBUG   machine:simulation    TICK: 1257PC:   57ADDR:  120MEM_OUT:    2ALU:    0ACC:    0LD #93
+  DEBUG   machine:simulation    TICK: 1258PC:   58ADDR:  120MEM_OUT:    2ALU:   93ACC:   93ST 121
+  DEBUG   machine:simulation    TICK: 1260PC:   59ADDR:  121MEM_OUT:    2ALU:   93ACC:   93LD 2046
+  DEBUG   machine:signal_latch_acc input: "[117, 116, 101, 114, 0]" >> 93
+  DEBUG   machine:simulation    TICK: 1262PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  117CMP #0
+  DEBUG   machine:simulation    TICK: 1263PC:   61ADDR: 2046MEM_OUT:    0ALU:  117ACC:  117BEQ 73
+  DEBUG   machine:simulation    TICK: 1264PC:   62ADDR: 2046MEM_OUT:    0ALU:  117ACC:  117ST ~121
+  DEBUG   machine:simulation    TICK: 1268PC:   63ADDR:   93MEM_OUT:   93ALU:  117ACC:  117LD 120
+  DEBUG   machine:simulation    TICK: 1270PC:   64ADDR:  120MEM_OUT:    0ALU:    0ACC:    0ADD #1
+  DEBUG   machine:simulation    TICK: 1271PC:   65ADDR:  120MEM_OUT:    0ALU:    1ACC:    1ST 120
+  DEBUG   machine:simulation    TICK: 1273PC:   66ADDR:  120MEM_OUT:    0ALU:    1ACC:    1LD 121
+  DEBUG   machine:simulation    TICK: 1275PC:   67ADDR:  121MEM_OUT:   93ALU:   93ACC:   93ADD #1
+  DEBUG   machine:simulation    TICK: 1276PC:   68ADDR:  121MEM_OUT:   93ALU:   94ACC:   94ST 121
+  DEBUG   machine:simulation    TICK: 1278PC:   69ADDR:  121MEM_OUT:   93ALU:   94ACC:   94LD 120
+  DEBUG   machine:simulation    TICK: 1280PC:   70ADDR:  120MEM_OUT:    1ALU:    1ACC:    1CMP #24
+  DEBUG   machine:simulation    TICK: 1281PC:   71ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1BEQ 73
+  DEBUG   machine:simulation    TICK: 1282PC:   72ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1JMP 59
+  DEBUG   machine:simulation    TICK: 1283PC:   59ADDR:  120MEM_OUT:    1ALU:  -23ACC:    1LD 2046
+  DEBUG   machine:signal_latch_acc input: "[116, 101, 114, 0]" >> 1
+  DEBUG   machine:simulation    TICK: 1285PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK: 1286PC:   61ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116BEQ 73
+  DEBUG   machine:simulation    TICK: 1287PC:   62ADDR: 2046MEM_OUT:    0ALU:  116ACC:  116ST ~121
+  DEBUG   machine:simulation    TICK: 1291PC:   63ADDR:   94MEM_OUT:   94ALU:  116ACC:  116LD 120
+  DEBUG   machine:simulation    TICK: 1293PC:   64ADDR:  120MEM_OUT:    1ALU:    1ACC:    1ADD #1
+  DEBUG   machine:simulation    TICK: 1294PC:   65ADDR:  120MEM_OUT:    1ALU:    2ACC:    2ST 120
+  DEBUG   machine:simulation    TICK: 1296PC:   66ADDR:  120MEM_OUT:    1ALU:    2ACC:    2LD 121
+  DEBUG   machine:simulation    TICK: 1298PC:   67ADDR:  121MEM_OUT:   94ALU:   94ACC:   94ADD #1
+  DEBUG   machine:simulation    TICK: 1299PC:   68ADDR:  121MEM_OUT:   94ALU:   95ACC:   95ST 121
+  DEBUG   machine:simulation    TICK: 1301PC:   69ADDR:  121MEM_OUT:   94ALU:   95ACC:   95LD 120
+  DEBUG   machine:simulation    TICK: 1303PC:   70ADDR:  120MEM_OUT:    2ALU:    2ACC:    2CMP #24
+  DEBUG   machine:simulation    TICK: 1304PC:   71ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2BEQ 73
+  DEBUG   machine:simulation    TICK: 1305PC:   72ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2JMP 59
+  DEBUG   machine:simulation    TICK: 1306PC:   59ADDR:  120MEM_OUT:    2ALU:  -22ACC:    2LD 2046
+  DEBUG   machine:signal_latch_acc input: "[101, 114, 0]" >> 2
+  DEBUG   machine:simulation    TICK: 1308PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK: 1309PC:   61ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101BEQ 73
+  DEBUG   machine:simulation    TICK: 1310PC:   62ADDR: 2046MEM_OUT:    0ALU:  101ACC:  101ST ~121
+  DEBUG   machine:simulation    TICK: 1314PC:   63ADDR:   95MEM_OUT:   95ALU:  101ACC:  101LD 120
+  DEBUG   machine:simulation    TICK: 1316PC:   64ADDR:  120MEM_OUT:    2ALU:    2ACC:    2ADD #1
+  DEBUG   machine:simulation    TICK: 1317PC:   65ADDR:  120MEM_OUT:    2ALU:    3ACC:    3ST 120
+  DEBUG   machine:simulation    TICK: 1319PC:   66ADDR:  120MEM_OUT:    2ALU:    3ACC:    3LD 121
+  DEBUG   machine:simulation    TICK: 1321PC:   67ADDR:  121MEM_OUT:   95ALU:   95ACC:   95ADD #1
+  DEBUG   machine:simulation    TICK: 1322PC:   68ADDR:  121MEM_OUT:   95ALU:   96ACC:   96ST 121
+  DEBUG   machine:simulation    TICK: 1324PC:   69ADDR:  121MEM_OUT:   95ALU:   96ACC:   96LD 120
+  DEBUG   machine:simulation    TICK: 1326PC:   70ADDR:  120MEM_OUT:    3ALU:    3ACC:    3CMP #24
+  DEBUG   machine:simulation    TICK: 1327PC:   71ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3BEQ 73
+  DEBUG   machine:simulation    TICK: 1328PC:   72ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3JMP 59
+  DEBUG   machine:simulation    TICK: 1329PC:   59ADDR:  120MEM_OUT:    3ALU:  -21ACC:    3LD 2046
+  DEBUG   machine:signal_latch_acc input: "[114, 0]" >> 3
+  DEBUG   machine:simulation    TICK: 1331PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK: 1332PC:   61ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114BEQ 73
+  DEBUG   machine:simulation    TICK: 1333PC:   62ADDR: 2046MEM_OUT:    0ALU:  114ACC:  114ST ~121
+  DEBUG   machine:simulation    TICK: 1337PC:   63ADDR:   96MEM_OUT:   96ALU:  114ACC:  114LD 120
+  DEBUG   machine:simulation    TICK: 1339PC:   64ADDR:  120MEM_OUT:    3ALU:    3ACC:    3ADD #1
+  DEBUG   machine:simulation    TICK: 1340PC:   65ADDR:  120MEM_OUT:    3ALU:    4ACC:    4ST 120
+  DEBUG   machine:simulation    TICK: 1342PC:   66ADDR:  120MEM_OUT:    3ALU:    4ACC:    4LD 121
+  DEBUG   machine:simulation    TICK: 1344PC:   67ADDR:  121MEM_OUT:   96ALU:   96ACC:   96ADD #1
+  DEBUG   machine:simulation    TICK: 1345PC:   68ADDR:  121MEM_OUT:   96ALU:   97ACC:   97ST 121
+  DEBUG   machine:simulation    TICK: 1347PC:   69ADDR:  121MEM_OUT:   96ALU:   97ACC:   97LD 120
+  DEBUG   machine:simulation    TICK: 1349PC:   70ADDR:  120MEM_OUT:    4ALU:    4ACC:    4CMP #24
+  DEBUG   machine:simulation    TICK: 1350PC:   71ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4BEQ 73
+  DEBUG   machine:simulation    TICK: 1351PC:   72ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4JMP 59
+  DEBUG   machine:simulation    TICK: 1352PC:   59ADDR:  120MEM_OUT:    4ALU:  -20ACC:    4LD 2046
+  DEBUG   machine:signal_latch_acc input: "[0]" >> 4
+  DEBUG   machine:simulation    TICK: 1354PC:   60ADDR: 2046MEM_OUT:    0ALU:    0ACC:    0CMP #0
+  DEBUG   machine:simulation    TICK: 1355PC:   61ADDR: 2046MEM_OUT:    0ALU:    0ACC:    0BEQ 73
+  DEBUG   machine:simulation    TICK: 1356PC:   73ADDR: 2046MEM_OUT:    0ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1357PC:   74ADDR: 2046MEM_OUT:    0ALU:    0ACC:    0ST 122
+  DEBUG   machine:simulation    TICK: 1359PC:   75ADDR:  122MEM_OUT:    0ALU:    0ACC:    0LD #93
+  DEBUG   machine:simulation    TICK: 1360PC:   76ADDR:  122MEM_OUT:    0ALU:   93ACC:   93ST 123
+  DEBUG   machine:simulation    TICK: 1362PC:   77ADDR:  123MEM_OUT:    0ALU:   93ACC:   93LD ~123
+  DEBUG   machine:simulation    TICK: 1365PC:   78ADDR:   93MEM_OUT:  117ALU:  117ACC:  117CMP #0
+  DEBUG   machine:simulation    TICK: 1366PC:   79ADDR:   93MEM_OUT:  117ALU:  117ACC:  117BEQ 91
+  DEBUG   machine:simulation    TICK: 1367PC:   80ADDR:   93MEM_OUT:  117ALU:  117ACC:  117ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112]" << 117
+  DEBUG   machine:simulation    TICK: 1369PC:   81ADDR: 2047MEM_OUT:  117ALU:  117ACC:  117LD 122
+  DEBUG   machine:simulation    TICK: 1371PC:   82ADDR:  122MEM_OUT:    0ALU:    0ACC:    0ADD #1
+  DEBUG   machine:simulation    TICK: 1372PC:   83ADDR:  122MEM_OUT:    0ALU:    1ACC:    1ST 122
+  DEBUG   machine:simulation    TICK: 1374PC:   84ADDR:  122MEM_OUT:    0ALU:    1ACC:    1LD 123
+  DEBUG   machine:simulation    TICK: 1376PC:   85ADDR:  123MEM_OUT:   93ALU:   93ACC:   93ADD #1
+  DEBUG   machine:simulation    TICK: 1377PC:   86ADDR:  123MEM_OUT:   93ALU:   94ACC:   94ST 123
+  DEBUG   machine:simulation    TICK: 1379PC:   87ADDR:  123MEM_OUT:   93ALU:   94ACC:   94LD 122
+  DEBUG   machine:simulation    TICK: 1381PC:   88ADDR:  122MEM_OUT:    1ALU:    1ACC:    1CMP #24
+  DEBUG   machine:simulation    TICK: 1382PC:   89ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1BEQ 91
+  DEBUG   machine:simulation    TICK: 1383PC:   90ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1JMP 77
+  DEBUG   machine:simulation    TICK: 1384PC:   77ADDR:  122MEM_OUT:    1ALU:  -23ACC:    1LD ~123
+  DEBUG   machine:simulation    TICK: 1387PC:   78ADDR:   94MEM_OUT:  116ALU:  116ACC:  116CMP #0
+  DEBUG   machine:simulation    TICK: 1388PC:   79ADDR:   94MEM_OUT:  116ALU:  116ACC:  116BEQ 91
+  DEBUG   machine:simulation    TICK: 1389PC:   80ADDR:   94MEM_OUT:  116ALU:  116ACC:  116ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117]" << 116
+  DEBUG   machine:simulation    TICK: 1391PC:   81ADDR: 2047MEM_OUT:  116ALU:  116ACC:  116LD 122
+  DEBUG   machine:simulation    TICK: 1393PC:   82ADDR:  122MEM_OUT:    1ALU:    1ACC:    1ADD #1
+  DEBUG   machine:simulation    TICK: 1394PC:   83ADDR:  122MEM_OUT:    1ALU:    2ACC:    2ST 122
+  DEBUG   machine:simulation    TICK: 1396PC:   84ADDR:  122MEM_OUT:    1ALU:    2ACC:    2LD 123
+  DEBUG   machine:simulation    TICK: 1398PC:   85ADDR:  123MEM_OUT:   94ALU:   94ACC:   94ADD #1
+  DEBUG   machine:simulation    TICK: 1399PC:   86ADDR:  123MEM_OUT:   94ALU:   95ACC:   95ST 123
+  DEBUG   machine:simulation    TICK: 1401PC:   87ADDR:  123MEM_OUT:   94ALU:   95ACC:   95LD 122
+  DEBUG   machine:simulation    TICK: 1403PC:   88ADDR:  122MEM_OUT:    2ALU:    2ACC:    2CMP #24
+  DEBUG   machine:simulation    TICK: 1404PC:   89ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2BEQ 91
+  DEBUG   machine:simulation    TICK: 1405PC:   90ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2JMP 77
+  DEBUG   machine:simulation    TICK: 1406PC:   77ADDR:  122MEM_OUT:    2ALU:  -22ACC:    2LD ~123
+  DEBUG   machine:simulation    TICK: 1409PC:   78ADDR:   95MEM_OUT:  101ALU:  101ACC:  101CMP #0
+  DEBUG   machine:simulation    TICK: 1410PC:   79ADDR:   95MEM_OUT:  101ALU:  101ACC:  101BEQ 91
+  DEBUG   machine:simulation    TICK: 1411PC:   80ADDR:   95MEM_OUT:  101ALU:  101ACC:  101ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116]" << 101
+  DEBUG   machine:simulation    TICK: 1413PC:   81ADDR: 2047MEM_OUT:  101ALU:  101ACC:  101LD 122
+  DEBUG   machine:simulation    TICK: 1415PC:   82ADDR:  122MEM_OUT:    2ALU:    2ACC:    2ADD #1
+  DEBUG   machine:simulation    TICK: 1416PC:   83ADDR:  122MEM_OUT:    2ALU:    3ACC:    3ST 122
+  DEBUG   machine:simulation    TICK: 1418PC:   84ADDR:  122MEM_OUT:    2ALU:    3ACC:    3LD 123
+  DEBUG   machine:simulation    TICK: 1420PC:   85ADDR:  123MEM_OUT:   95ALU:   95ACC:   95ADD #1
+  DEBUG   machine:simulation    TICK: 1421PC:   86ADDR:  123MEM_OUT:   95ALU:   96ACC:   96ST 123
+  DEBUG   machine:simulation    TICK: 1423PC:   87ADDR:  123MEM_OUT:   95ALU:   96ACC:   96LD 122
+  DEBUG   machine:simulation    TICK: 1425PC:   88ADDR:  122MEM_OUT:    3ALU:    3ACC:    3CMP #24
+  DEBUG   machine:simulation    TICK: 1426PC:   89ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3BEQ 91
+  DEBUG   machine:simulation    TICK: 1427PC:   90ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3JMP 77
+  DEBUG   machine:simulation    TICK: 1428PC:   77ADDR:  122MEM_OUT:    3ALU:  -21ACC:    3LD ~123
+  DEBUG   machine:simulation    TICK: 1431PC:   78ADDR:   96MEM_OUT:  114ALU:  114ACC:  114CMP #0
+  DEBUG   machine:simulation    TICK: 1432PC:   79ADDR:   96MEM_OUT:  114ALU:  114ACC:  114BEQ 91
+  DEBUG   machine:simulation    TICK: 1433PC:   80ADDR:   96MEM_OUT:  114ALU:  114ACC:  114ST 2047
+  DEBUG   machine:signal_write  output: "[73, 32, 108, 105, 107, 101, 32, 97, 114, 99, 104, 105, 116, 101, 99, 116, 117, 114, 101, 32, 99, 111, 109, 112, 117, 116, 101]" << 114
+  DEBUG   machine:simulation    TICK: 1435PC:   81ADDR: 2047MEM_OUT:  114ALU:  114ACC:  114LD 122
+  DEBUG   machine:simulation    TICK: 1437PC:   82ADDR:  122MEM_OUT:    3ALU:    3ACC:    3ADD #1
+  DEBUG   machine:simulation    TICK: 1438PC:   83ADDR:  122MEM_OUT:    3ALU:    4ACC:    4ST 122
+  DEBUG   machine:simulation    TICK: 1440PC:   84ADDR:  122MEM_OUT:    3ALU:    4ACC:    4LD 123
+  DEBUG   machine:simulation    TICK: 1442PC:   85ADDR:  123MEM_OUT:   96ALU:   96ACC:   96ADD #1
+  DEBUG   machine:simulation    TICK: 1443PC:   86ADDR:  123MEM_OUT:   96ALU:   97ACC:   97ST 123
+  DEBUG   machine:simulation    TICK: 1445PC:   87ADDR:  123MEM_OUT:   96ALU:   97ACC:   97LD 122
+  DEBUG   machine:simulation    TICK: 1447PC:   88ADDR:  122MEM_OUT:    4ALU:    4ACC:    4CMP #24
+  DEBUG   machine:simulation    TICK: 1448PC:   89ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4BEQ 91
+  DEBUG   machine:simulation    TICK: 1449PC:   90ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4JMP 77
+  DEBUG   machine:simulation    TICK: 1450PC:   77ADDR:  122MEM_OUT:    4ALU:  -20ACC:    4LD ~123
+  DEBUG   machine:simulation    TICK: 1453PC:   78ADDR:   97MEM_OUT:    0ALU:    0ACC:    0CMP #0
+  DEBUG   machine:simulation    TICK: 1454PC:   79ADDR:   97MEM_OUT:    0ALU:    0ACC:    0BEQ 91
+  DEBUG   machine:simulation    TICK: 1455PC:   91ADDR:   97MEM_OUT:    0ALU:    0ACC:    0JMP 2
+  DEBUG   machine:simulation    TICK: 1456PC:    2ADDR:   97MEM_OUT:    0ALU:    0ACC:    0LD #2
+  DEBUG   machine:simulation    TICK: 1457PC:    3ADDR:   97MEM_OUT:    0ALU:    2ACC:    2ST 119
+  DEBUG   machine:simulation    TICK: 1459PC:    4ADDR:  119MEM_OUT:    0ALU:    2ACC:    2LD 118
+  DEBUG   machine:simulation    TICK: 1461PC:    5ADDR:  118MEM_OUT:    1ALU:    1ACC:    1CMP 119
+  DEBUG   machine:simulation    TICK: 1463PC:    6ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1BG 92
+  DEBUG   machine:simulation    TICK: 1464PC:    7ADDR:  119MEM_OUT:    2ALU:   -1ACC:    1LD #0
+  DEBUG   machine:simulation    TICK: 1465PC:    8ADDR:  119MEM_OUT:    2ALU:    0ACC:    0ST 93
+  DEBUG   machine:simulation    TICK: 1467PC:    9ADDR:   93MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1468PC:   10ADDR:   93MEM_OUT:    2ALU:    0ACC:    0ST 94
+  DEBUG   machine:simulation    TICK: 1470PC:   11ADDR:   94MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1471PC:   12ADDR:   94MEM_OUT:    2ALU:    0ACC:    0ST 95
+  DEBUG   machine:simulation    TICK: 1473PC:   13ADDR:   95MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1474PC:   14ADDR:   95MEM_OUT:    2ALU:    0ACC:    0ST 96
+  DEBUG   machine:simulation    TICK: 1476PC:   15ADDR:   96MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1477PC:   16ADDR:   96MEM_OUT:    2ALU:    0ACC:    0ST 97
+  DEBUG   machine:simulation    TICK: 1479PC:   17ADDR:   97MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1480PC:   18ADDR:   97MEM_OUT:    2ALU:    0ACC:    0ST 98
+  DEBUG   machine:simulation    TICK: 1482PC:   19ADDR:   98MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1483PC:   20ADDR:   98MEM_OUT:    2ALU:    0ACC:    0ST 99
+  DEBUG   machine:simulation    TICK: 1485PC:   21ADDR:   99MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1486PC:   22ADDR:   99MEM_OUT:    2ALU:    0ACC:    0ST 100
+  DEBUG   machine:simulation    TICK: 1488PC:   23ADDR:  100MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1489PC:   24ADDR:  100MEM_OUT:    2ALU:    0ACC:    0ST 101
+  DEBUG   machine:simulation    TICK: 1491PC:   25ADDR:  101MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1492PC:   26ADDR:  101MEM_OUT:    2ALU:    0ACC:    0ST 102
+  DEBUG   machine:simulation    TICK: 1494PC:   27ADDR:  102MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1495PC:   28ADDR:  102MEM_OUT:    2ALU:    0ACC:    0ST 103
+  DEBUG   machine:simulation    TICK: 1497PC:   29ADDR:  103MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1498PC:   30ADDR:  103MEM_OUT:    2ALU:    0ACC:    0ST 104
+  DEBUG   machine:simulation    TICK: 1500PC:   31ADDR:  104MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1501PC:   32ADDR:  104MEM_OUT:    2ALU:    0ACC:    0ST 105
+  DEBUG   machine:simulation    TICK: 1503PC:   33ADDR:  105MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1504PC:   34ADDR:  105MEM_OUT:    2ALU:    0ACC:    0ST 106
+  DEBUG   machine:simulation    TICK: 1506PC:   35ADDR:  106MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1507PC:   36ADDR:  106MEM_OUT:    2ALU:    0ACC:    0ST 107
+  DEBUG   machine:simulation    TICK: 1509PC:   37ADDR:  107MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1510PC:   38ADDR:  107MEM_OUT:    2ALU:    0ACC:    0ST 108
+  DEBUG   machine:simulation    TICK: 1512PC:   39ADDR:  108MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1513PC:   40ADDR:  108MEM_OUT:    2ALU:    0ACC:    0ST 109
+  DEBUG   machine:simulation    TICK: 1515PC:   41ADDR:  109MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1516PC:   42ADDR:  109MEM_OUT:    2ALU:    0ACC:    0ST 110
+  DEBUG   machine:simulation    TICK: 1518PC:   43ADDR:  110MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1519PC:   44ADDR:  110MEM_OUT:    2ALU:    0ACC:    0ST 111
+  DEBUG   machine:simulation    TICK: 1521PC:   45ADDR:  111MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1522PC:   46ADDR:  111MEM_OUT:    2ALU:    0ACC:    0ST 112
+  DEBUG   machine:simulation    TICK: 1524PC:   47ADDR:  112MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1525PC:   48ADDR:  112MEM_OUT:    2ALU:    0ACC:    0ST 113
+  DEBUG   machine:simulation    TICK: 1527PC:   49ADDR:  113MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1528PC:   50ADDR:  113MEM_OUT:    2ALU:    0ACC:    0ST 114
+  DEBUG   machine:simulation    TICK: 1530PC:   51ADDR:  114MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1531PC:   52ADDR:  114MEM_OUT:    2ALU:    0ACC:    0ST 115
+  DEBUG   machine:simulation    TICK: 1533PC:   53ADDR:  115MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1534PC:   54ADDR:  115MEM_OUT:    2ALU:    0ACC:    0ST 116
+  DEBUG   machine:simulation    TICK: 1536PC:   55ADDR:  116MEM_OUT:    2ALU:    0ACC:    0LD #0
+  DEBUG   machine:simulation    TICK: 1537PC:   56ADDR:  116MEM_OUT:    2ALU:    0ACC:    0ST 120
+  DEBUG   machine:simulation    TICK: 1539PC:   57ADDR:  120MEM_OUT:    2ALU:    0ACC:    0LD #93
+  DEBUG   machine:simulation    TICK: 1540PC:   58ADDR:  120MEM_OUT:    2ALU:   93ACC:   93ST 121
+  DEBUG   machine:simulation    TICK: 1542PC:   59ADDR:  121MEM_OUT:    2ALU:   93ACC:   93LD 2046
+  WARNING machine:simulation     Входной буфер пустой!
+
