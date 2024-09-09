@@ -1,6 +1,7 @@
 import logging
 import sys
-from ..isa import AddrMode, Instruction, Opcode, INPUT_CELL, OUTPUT_CELL, binary2code
+
+from ..isa import INPUT_CELL, OUTPUT_CELL, AddrMode, Instruction, Opcode, binary2code
 
 
 class DataPath:
@@ -115,6 +116,57 @@ class ControlUnit:
         self.tick()
         return True
 
+    def execute_ld(self, instr: Instruction):
+        if instr.addr_mode is AddrMode.DIRECT:
+            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)  # установить в рег.адреса аргумент
+            self.data_path.signal_read()  # подать значение по адресу на выход памяти
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.tick()
+        elif instr.addr_mode is AddrMode.INDIRECT:
+            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+            self.data_path.signal_read()
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.tick()
+            self.data_path.signal_latch_address(sel_instr=False)
+            self.data_path.signal_read()
+            self.tick()
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.data_path.signal_latch_acc(sel_input=False)
+        elif instr.addr_mode is AddrMode.IMMEDIATE:
+            self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
+        if instr.arg == INPUT_CELL:
+            self.data_path.signal_latch_acc(sel_input=True)
+        else:
+            self.data_path.signal_latch_acc(sel_input=False)
+
+    def execute_st(self, instr: Instruction):
+        if instr.addr_mode is AddrMode.DIRECT:
+            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+            self.data_path.alu_op(sel_instr=False)
+            self.data_path.signal_write()
+            self.tick()
+        elif instr.addr_mode is AddrMode.INDIRECT:
+            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+            self.data_path.signal_read()
+            self.tick()
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.data_path.signal_latch_address(sel_instr=False)
+            self.tick()
+            self.data_path.alu_op(sel_instr=False)
+            self.data_path.signal_write()
+            self.tick()
+
+    def execute_math(self, instr: Instruction):
+        if instr.addr_mode is AddrMode.DIRECT:
+            self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
+            self.data_path.signal_read()
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.tick()
+        elif instr.addr_mode is AddrMode.IMMEDIATE:
+            self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
+        if instr.opcode is not Opcode.CMP:  # не защелкиваем в acc результат, если выставляли флаги
+            self.data_path.signal_latch_acc(sel_input=False)
+
     def decode_and_execute_instruction(self):
         instr = self.data_path.memory[self.program_counter]
 
@@ -122,54 +174,11 @@ class ControlUnit:
             return
 
         if instr.opcode is Opcode.LD:
-            if instr.addr_mode is AddrMode.DIRECT:
-                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)  # установить в рег.адреса аргумент
-                self.data_path.signal_read()  # подать значение по адресу на выход памяти
-                self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                self.tick()
-            if instr.addr_mode is AddrMode.INDIRECT:
-                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
-                self.data_path.signal_read()
-                self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                self.tick()
-                self.data_path.signal_latch_address(sel_instr=False)
-                self.data_path.signal_read()
-                self.tick()
-                self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                self.data_path.signal_latch_acc(sel_input=False)
-            elif instr.addr_mode is AddrMode.IMMEDIATE:
-                self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
-            if instr.arg == INPUT_CELL:
-                self.data_path.signal_latch_acc(sel_input=True)
-            else:
-                self.data_path.signal_latch_acc(sel_input=False)
+            self.execute_ld(instr=instr)
         elif instr.opcode is Opcode.ST:
-            if instr.addr_mode is AddrMode.DIRECT:
-                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
-                self.data_path.alu_op(sel_instr=False)
-                self.data_path.signal_write()
-                self.tick()
-            if instr.addr_mode is AddrMode.INDIRECT:
-                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
-                self.data_path.signal_read()
-                self.tick()
-                self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                self.data_path.signal_latch_address(sel_instr=False)
-                self.tick()
-                self.data_path.alu_op(sel_instr=False)
-                self.data_path.signal_write()
-                self.tick()
+            self.execute_st(instr=instr)
         elif instr.opcode in {Opcode.ADD, Opcode.SUB, Opcode.MUL, Opcode.DIV, Opcode.MOD, Opcode.CMP}:
-            if instr.addr_mode is AddrMode.DIRECT:
-                self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
-                self.data_path.signal_read()
-                self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
-                self.tick()
-            elif instr.addr_mode is AddrMode.IMMEDIATE:
-                self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
-
-            if instr.opcode is not Opcode.CMP:  # не защелкиваем в acc результат, если выставляли флаги
-                self.data_path.signal_latch_acc(sel_input=False)
+            self.execute_math(instr=instr)
 
         self.tick()
         self.latch_program_counter(sel_next=True)
@@ -186,7 +195,7 @@ class ControlUnit:
         )
 
 
-def simulation(memory: list[Instruction], input_buffer: list, limit: int) -> tuple[str, int, int]:  # fmt: skip
+def simulation(memory: list[Instruction], input_buffer: list, limit: int) -> tuple[str, int, int]:
     data_path = DataPath(memory, input_buffer)
     control_unit = ControlUnit(data_path)
     program_counter = 0

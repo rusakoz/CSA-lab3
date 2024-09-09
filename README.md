@@ -656,8 +656,9 @@ tests/golden_test.py::test_translator_and_machine[golden/prob1.yml]       PASSED
 
 ===================================================== 3 passed in 1.84s =======================================================================
 $ poetry run ruff check
+All checks passed!
+$ poetry run ruff format --check
 
-$ poetry run ruff format
 
 ```
 

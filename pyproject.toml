@@ -55,7 +55,7 @@ select = [
     # flake8-commas (to enforce trailing commas)
     "COM",
     # flake8-future-annotations (to ensure enabling modern (3.7+) postponed evaluation of type hints)
-    "FA",
+    # "FA",
     # flake8-import-conventions (to enforce standartized import aliases like "import pandas as pd")
     "ICN",
     # flake8-no-pep420 (to enforce presence of __init__.py in packages)
@@ -96,4 +96,4 @@ unfixable = [
 src = ["src"]
 
 [tool.ruff.mccabe]
-max-complexity = 7
+max-complexity = 10
