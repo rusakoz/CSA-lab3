@@ -117,10 +117,13 @@ class ControlUnit:
         return True
 
     def execute_ld(self, instr: Instruction):
+        if instr.arg == INPUT_CELL:
+            self.data_path.signal_latch_acc(sel_input=True)
+            return
         if instr.addr_mode is AddrMode.DIRECT:
             self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)  # установить в рег.адреса аргумент
             self.data_path.signal_read()  # подать значение по адресу на выход памяти
-            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)
+            self.data_path.alu_op(sel_instr=False, opcode=instr.opcode)  # получить значение на выход alu
             self.tick()
         elif instr.addr_mode is AddrMode.INDIRECT:
             self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
@@ -134,10 +137,8 @@ class ControlUnit:
             self.data_path.signal_latch_acc(sel_input=False)
         elif instr.addr_mode is AddrMode.IMMEDIATE:
             self.data_path.alu_op(sel_instr=True, second_operand=instr.arg, opcode=instr.opcode)
-        if instr.arg == INPUT_CELL:
-            self.data_path.signal_latch_acc(sel_input=True)
-        else:
-            self.data_path.signal_latch_acc(sel_input=False)
+
+        self.data_path.signal_latch_acc(sel_input=False)
 
     def execute_st(self, instr: Instruction):
         if instr.addr_mode is AddrMode.DIRECT:
@@ -185,12 +186,12 @@ class ControlUnit:
 
     def __repr__(self):
         return (
-            f"TICK: {self._tick:4}"
-            f"PC: {self.program_counter:4}"
-            f"ADDR: {self.data_path.addr_reg:4}"
-            f"MEM_OUT: {self.data_path.memory_output:4}"
-            f"ALU: {self.data_path.alu:4}"
-            f"ACC: {self.data_path.acc:4}"
+            f"TICK: {self._tick:<7}"
+            f"PC: {self.program_counter:<7}"
+            f"ADDR: {self.data_path.addr_reg:<7}"
+            f"MEM_OUT: {self.data_path.memory_output:<7}"
+            f"ALU: {self.data_path.alu:<7}"
+            f"ACC: {self.data_path.acc:<7}"
             f"{self.data_path.memory[self.program_counter]}"
         )
 
