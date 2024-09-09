@@ -48,11 +48,6 @@ class Instruction(NamedTuple):
         return f"{self.opcode.name} {['', '~', '#'][self.addr_mode.value]}{self.arg}"
 
 
-def write_code(filename, binary_code):
-    with open(filename, "wb") as file:
-        file.write(binary_code)
-
-
 def binary2code(filename) -> list:
     machine_code = []
     with open(filename, "rb") as file:
