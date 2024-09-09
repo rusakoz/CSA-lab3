@@ -11,6 +11,7 @@ from ..isa import INPUT_CELL, OUTPUT_CELL, AddrMode, Instruction, Opcode
 
 STR_MAX_LENGTH = 24
 
+
 def symbols():
     return {"+", "-", "*", "/", "%", ">", "<", "==", "!="}
 
@@ -89,6 +90,7 @@ def get_addr_var(
         addr = var_name_addr[var].addr
     return count_var, addr, start
 
+
 def translate_type_int(count_var: int, type_int: str, var_name_addr: dict, instructions: list[Instruction]) -> int:
     count_var += 1
     without_tab = del_tab(type_int)
@@ -99,14 +101,15 @@ def translate_type_int(count_var: int, type_int: str, var_name_addr: dict, instr
     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
     return count_var
 
-def translate_type_str(count_var: int, type_str: str, var_name_addr: dict, instructions: list[Instruction], str_name_length: dict) -> int:
+
+def translate_type_str(
+    count_var: int, type_str: str, var_name_addr: dict, instructions: list[Instruction], str_name_length: dict
+) -> int:
     count_var += 1
     without_tab = del_tab(type_str)
     split_str = without_tab.split(" ", 3)
 
-    assert (
-        len(split_str[3][1:-1]) <= STR_MAX_LENGTH
-    ), f'Превышен лимит {STR_MAX_LENGTH} строки "{split_str[3][1:-1]}"'
+    assert len(split_str[3][1:-1]) <= STR_MAX_LENGTH, f'Превышен лимит {STR_MAX_LENGTH} строки "{split_str[3][1:-1]}"'
 
     ascii_code = list(split_str[3][1:-1].encode("cp1251"))
     start_pos = count_var
@@ -120,6 +123,7 @@ def translate_type_str(count_var: int, type_str: str, var_name_addr: dict, instr
         count_var += STR_MAX_LENGTH - str_length
     str_name_length[split_str[1]] = str_length
     return count_var
+
 
 def translate_math_op(count_var: int, math_op: str, var_name_addr: dict, instructions: list[Instruction]) -> int:
     without_tab = del_tab(math_op)
@@ -139,7 +143,10 @@ def translate_math_op(count_var: int, math_op: str, var_name_addr: dict, instruc
         var_name_addr[name] = Addr(var_name_addr[name].addr, True)
     return count_var
 
-def translate_if_statement(count_var: int, if_statement: str, var_name_addr: dict, instructions: list[Instruction], list_of_while_if: list) -> int:
+
+def translate_if_statement(
+    count_var: int, if_statement: str, var_name_addr: dict, instructions: list[Instruction], list_of_while_if: list
+) -> int:
     without_tab = del_tab(if_statement)
     split_str = without_tab.split(" ")
 
@@ -170,7 +177,10 @@ def translate_if_statement(count_var: int, if_statement: str, var_name_addr: dic
     list_of_while_if.append(IfStatement("if", end))
     return count_var
 
-def translate_while_statement(count_var: int, while_statement: str, var_name_addr: dict, instructions: list[Instruction], list_of_while_if: list) -> int:
+
+def translate_while_statement(
+    count_var: int, while_statement: str, var_name_addr: dict, instructions: list[Instruction], list_of_while_if: list
+) -> int:
     without_tab = del_tab(while_statement)
     split_str = without_tab.split(" ")
 
@@ -199,7 +209,10 @@ def translate_while_statement(count_var: int, while_statement: str, var_name_add
     list_of_while_if.append(WhileStatement("while", start, end))
     return count_var
 
-def translate_input(count_var: int, _input: str, var_name_addr: dict, instructions: list[Instruction], move_addr: list) -> int:
+
+def translate_input(
+    count_var: int, _input: str, var_name_addr: dict, instructions: list[Instruction], move_addr: list
+) -> int:
     count_var += 1
     without_tab = del_tab(_input)
     split_str = without_tab.split(" ")
@@ -219,23 +232,39 @@ def translate_input(count_var: int, _input: str, var_name_addr: dict, instructio
 
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, INPUT_CELL))  # получили входные данные
     instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0))  # проверили на ноль
-    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12))  # если ноль, то в конец всех эппэндов
-    instructions.append(Instruction(Opcode.ST, AddrMode.INDIRECT, count_var + 1))  # сохранили в первую ячейку введенный символ
+    instructions.append(
+        Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12)
+    )  # если ноль, то в конец всех эппэндов
+    instructions.append(
+        Instruction(Opcode.ST, AddrMode.INDIRECT, count_var + 1)
+    )  # сохранили в первую ячейку введенный символ
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
     instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1))  # увеличили счетчик длины слова
     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
-    instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1))  # увеличили адрес ячейки на 1(указываем на следующую)
+    instructions.append(
+        Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)
+    )  # увеличили адрес ячейки на 1(указываем на следующую)
     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
-    instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH))  # проверяем, чтобы строка была до пределов
+    instructions.append(
+        Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)
+    )  # проверяем, чтобы строка была до пределов
     instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
     instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 13))
 
     count_var += 1
     return count_var
 
-def translate_output(count_var: int, _output: str, var_name_addr: dict, str_name_length: dict, instructions: list[Instruction], move_addr: list) -> int:
+
+def translate_output(
+    count_var: int,
+    _output: str,
+    var_name_addr: dict,
+    str_name_length: dict,
+    instructions: list[Instruction],
+    move_addr: list,
+) -> int:
     without_tab = del_tab(_output)
     split_str = without_tab.split(" ")
 
@@ -258,18 +287,26 @@ def translate_output(count_var: int, _output: str, var_name_addr: dict, str_name
         move_addr.append(len(instructions) - 1)  # для сдвига адреса
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
 
-        instructions.append(Instruction(Opcode.LD, AddrMode.INDIRECT, count_var + 1))  # загружаем значение первой ячейки в ACC
+        instructions.append(
+            Instruction(Opcode.LD, AddrMode.INDIRECT, count_var + 1)
+        )  # загружаем значение первой ячейки в ACC
         instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, 0))  # проверяем на ноль
-        instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12))  # если ноль, то в конец всех эппэндов
+        instructions.append(
+            Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 12)
+        )  # если ноль, то в конец всех эппэндов
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL))  # записываем значение в ячейку вывода
         instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
         instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1))  # увеличили счетчик длины слова
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
         instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var + 1))
-        instructions.append(Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1))  # увеличили адрес ячейки на 1(указываем на следующую)
+        instructions.append(
+            Instruction(Opcode.ADD, AddrMode.IMMEDIATE, 1)
+        )  # увеличили адрес ячейки на 1(указываем на следующую)
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var + 1))
         instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, count_var))
-        instructions.append(Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH))  # проверяем, чтобы строка была до 16 символов
+        instructions.append(
+            Instruction(Opcode.CMP, AddrMode.IMMEDIATE, STR_MAX_LENGTH)
+        )  # проверяем, чтобы строка была до 16 символов
         instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, len(instructions) + 2))
         instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, len(instructions) - 13))
         count_var += 1
@@ -279,18 +316,24 @@ def translate_output(count_var: int, _output: str, var_name_addr: dict, str_name
         instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, OUTPUT_CELL))
     return count_var
 
+
 def translate_end_block(counter_end_block: int, instructions: list[Instruction], list_of_while_if: list) -> int:
     counter_end_block += 1
     pos = len(list_of_while_if) - counter_end_block
     obj_by_pos = list_of_while_if[pos]
     if obj_by_pos.typ == "while":
         last_pos_inst = len(instructions) + 1
-        instructions[obj_by_pos.end] = Instruction(instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst)
+        instructions[obj_by_pos.end] = Instruction(
+            instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst
+        )
         instructions.append(Instruction(Opcode.JMP, AddrMode.DIRECT, obj_by_pos.start))
     if obj_by_pos.typ == "if":
         last_pos_inst = len(instructions)
-        instructions[obj_by_pos.end] = Instruction(instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst)
+        instructions[obj_by_pos.end] = Instruction(
+            instructions[obj_by_pos.end].opcode, instructions[obj_by_pos.end].addr_mode, last_pos_inst
+        )
     return counter_end_block
+
 
 def move_addr_data_before_instrs(instructions: list[Instruction], move_addr: list):
     for e, i in enumerate(instructions):
@@ -364,7 +407,11 @@ def code2instructions(text: str) -> list[Instruction]:
             )
         elif type_str:
             count_var = translate_type_str(
-                count_var=count_var, type_str=type_str[0], var_name_addr=var_name_addr, instructions=instructions, str_name_length=str_name_length
+                count_var=count_var,
+                type_str=type_str[0],
+                var_name_addr=var_name_addr,
+                instructions=instructions,
+                str_name_length=str_name_length,
             )
         elif math_op:
             count_var = translate_math_op(
@@ -372,23 +419,36 @@ def code2instructions(text: str) -> list[Instruction]:
             )
         elif if_statement:
             count_var = translate_if_statement(
-                count_var=count_var, if_statement=if_statement[0], var_name_addr=var_name_addr, instructions=instructions,
-                list_of_while_if=list_of_while_if
+                count_var=count_var,
+                if_statement=if_statement[0],
+                var_name_addr=var_name_addr,
+                instructions=instructions,
+                list_of_while_if=list_of_while_if,
             )
         elif while_statement:
             count_var = translate_while_statement(
-                count_var=count_var, while_statement=while_statement[0], var_name_addr=var_name_addr, instructions=instructions,
-                list_of_while_if=list_of_while_if
+                count_var=count_var,
+                while_statement=while_statement[0],
+                var_name_addr=var_name_addr,
+                instructions=instructions,
+                list_of_while_if=list_of_while_if,
             )
         elif _input:
             count_var = translate_input(
-                count_var=count_var, _input=_input[0], var_name_addr=var_name_addr, instructions=instructions,
-                move_addr=move_addr
+                count_var=count_var,
+                _input=_input[0],
+                var_name_addr=var_name_addr,
+                instructions=instructions,
+                move_addr=move_addr,
             )
         elif _output:
             count_var = translate_output(
-                count_var=count_var, _output=_output[0], var_name_addr=var_name_addr, str_name_length=str_name_length,
-                instructions=instructions, move_addr=move_addr
+                count_var=count_var,
+                _output=_output[0],
+                var_name_addr=var_name_addr,
+                str_name_length=str_name_length,
+                instructions=instructions,
+                move_addr=move_addr,
             )
         elif end_block:
             counter_end_block = translate_end_block(
