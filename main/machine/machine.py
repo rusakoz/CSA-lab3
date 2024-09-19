@@ -155,7 +155,6 @@ class ControlUnit:
             self.tick()
             self.data_path.alu_op(sel_instr=False)
             self.data_path.signal_write()
-            self.tick()
 
     def execute_math(self, instr: Instruction):
         if instr.addr_mode is AddrMode.DIRECT:
@@ -181,8 +180,8 @@ class ControlUnit:
         elif instr.opcode in {Opcode.ADD, Opcode.SUB, Opcode.MUL, Opcode.DIV, Opcode.MOD, Opcode.CMP}:
             self.execute_math(instr=instr)
 
-        self.tick()
         self.latch_program_counter(sel_next=True)
+        self.tick()
 
     def __repr__(self):
         return (
