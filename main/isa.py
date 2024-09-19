@@ -70,12 +70,5 @@ def binary2code(filename) -> list:
             else:
                 arg = struct.unpack(">i", arg)
             machine_code.append(Instruction(Opcode(op), AddrMode(mode), arg[0]))
-        # TODO мб, строковые литералы будут сохраняться не через LD ST
-        while bin_code_data := file.read(4):
-            assert len(bin_code_data) == 4, "Бинарный файл невалиден"
-
-            data = struct.unpack(">i", bin_code_data)
-
-            machine_code.append(data[0])
 
     return machine_code

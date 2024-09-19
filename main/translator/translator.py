@@ -12,10 +12,6 @@ from ..isa import INPUT_CELL, OUTPUT_CELL, AddrMode, Instruction, Opcode
 STR_MAX_LENGTH = 24
 
 
-def symbols():
-    return {"+", "-", "*", "/", "%", ">", "<", "==", "!="}
-
-
 def symbol2opcode(symbol) -> Opcode:
     return {
         "+": Opcode.ADD,
@@ -96,6 +92,8 @@ def translate_type_int(count_var: int, type_int: str, var_name_addr: dict, instr
     without_tab = del_tab(type_int)
     split_str = without_tab.split(" ")
 
+    assert -(2**31) <= len(split_str[3]) <= 2**31 - 1, "Число может быть от -2^31 до 2^31-1"
+
     var_name_addr[split_str[1]] = Addr(count_var, False)
     instructions.append(Instruction(Opcode.LD, AddrMode.IMMEDIATE, int(split_str[3])))
     instructions.append(Instruction(Opcode.ST, AddrMode.DIRECT, count_var))
@@ -159,7 +157,7 @@ def translate_if_statement(
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, addr1))
     instructions.append(Instruction(symbol2opcode(split_str[2]), AddrMode.DIRECT, addr2))
     instructions.append(Instruction(Opcode.CMP, AddrMode.DIRECT, addr3))
-    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, 7777777))
+    instructions.append(Instruction(Opcode.BEQ, AddrMode.DIRECT, None))
     beq_pos = len(instructions) - 1
 
     count_var, addr4, none = get_addr_var(instructions, var_name_addr, to_unlock, split_str[7], count_var)
@@ -169,7 +167,7 @@ def translate_if_statement(
     instructions.append(Instruction(Opcode.LD, AddrMode.DIRECT, addr4))
     instructions.append(Instruction(symbol2opcode(split_str[8]), AddrMode.DIRECT, addr5))
     instructions.append(Instruction(Opcode.CMP, AddrMode.DIRECT, addr6))
-    instructions.append(Instruction(Opcode.BNE, AddrMode.DIRECT, 7777777))
+    instructions.append(Instruction(Opcode.BNE, AddrMode.DIRECT, None))
     end = len(instructions) - 1
 
     instructions[beq_pos] = Instruction(instructions[beq_pos].opcode, instructions[beq_pos].addr_mode, end + 1)
@@ -203,7 +201,7 @@ def translate_while_statement(
     for name in to_unlock:
         var_name_addr[name] = Addr(var_name_addr[name].addr, True)
 
-    instructions.append(Instruction(symbol2opcode(split_str[2]), AddrMode.DIRECT, 7777777))
+    instructions.append(Instruction(symbol2opcode(split_str[2]), AddrMode.DIRECT, None))
     end = len(instructions) - 1
 
     list_of_while_if.append(WhileStatement("while", start, end))
