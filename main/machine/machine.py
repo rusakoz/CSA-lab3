@@ -66,8 +66,8 @@ class DataPath:
 
     def signal_write(self):
         if self.addr_reg == OUTPUT_CELL:
-            logging.debug(f"output: \"{"".join(str(self.output_buffer))}\" << {self.alu}")
-            self.output_buffer.append(self.alu)
+            logging.debug(f"output: \"{"".join(str(self.output_buffer))}\" << {self.acc}")
+            self.output_buffer.append(self.acc)
         else:
             self.memory[self.addr_reg] = self.alu
 
@@ -144,6 +144,7 @@ class ControlUnit:
         if instr.addr_mode is AddrMode.DIRECT:
             self.data_path.signal_latch_address(sel_instr=True, instr_arg=instr.arg)
             self.data_path.alu_op(sel_instr=False)
+            self.data_path.signal_latch_acc(sel_input=False)
             self.data_path.signal_write()
             self.tick()
         elif instr.addr_mode is AddrMode.INDIRECT:
